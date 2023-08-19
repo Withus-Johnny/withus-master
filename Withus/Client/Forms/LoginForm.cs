@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using Client.Properties;
+using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WithusUI.Configs;
@@ -7,7 +8,6 @@ namespace Client.Forms
 {
     public partial class LoginForm : Form
     {
-
         private bool _isDraging = false;
         private Point _dragStartPoint;
         private Rectangle _borderRect;
@@ -15,6 +15,8 @@ namespace Client.Forms
         public LoginForm()
         {
             InitializeComponent();
+            this.Text = "위더스 - 로그인";
+            this.Icon = Resources.Icon_Withus;
             this.Size = Const.LoginFormSize;
             this.Padding = new Padding(Const.LoginForm_Padding);
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -34,7 +36,7 @@ namespace Client.Forms
         }
 
         #region Function
-        private async Task FlashBorder(int duration = 300, int repeatCount = 3)
+        private async Task FlashBorder(int duration = 150, int repeatCount = 3)
         {
             using (Graphics g = this.CreateGraphics())
             {
