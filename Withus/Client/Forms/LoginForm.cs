@@ -1,96 +1,154 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using WithusUI.Configs;
-using WithusUI.Win32;
 
 namespace Client.Forms
 {
-	public partial class LoginForm : Form
-	{
-		private Rectangle _borderRect;
+    public partial class LoginForm : Form
+    {
 
-		public LoginForm()
-		{
-			InitializeComponent();
-			this.Size = new Size(364, 783);
-			this.StartPosition = FormStartPosition.CenterScreen;
-			this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-			this.FormBorderStyle = FormBorderStyle.None;
-			this.BackColor = Colors.FormBackGroundColor;
-			_borderRect = new Rectangle(ClientRectangle.Location, new Size(ClientRectangle.Width - 1, ClientRectangle.Height - 1));
-		}
+        private bool _isDraging = false;
+        private Point _dragStartPoint;
+        private Rectangle _borderRect;
 
-		protected override void WndProc(ref Message m)
-		{
-			base.WndProc(ref m);
+        public LoginForm()
+        {
+            InitializeComponent();
+            this.Size = Const.LoginFormSize;
+            this.Padding = new Padding(Const.LoginForm_Padding);
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.BackColor = Colors.FormBackGroundColor;
+            _borderRect = new Rectangle(ClientRectangle.Location, new Size(ClientRectangle.Width - 1, ClientRectangle.Height - 1));
 
-			switch (m.Msg)
-			{
-				case WindowMessages.WM_NCLBUTTONDOWN:
-					this.BeginInvoke(new MethodInvoker(EnsureWindowPositionWithinScreenBounds));
-					break;
-				case WindowMessages.WM_NCHITTEST:
-					if ((int)m.Result == WindowMessages.HTCLIENT)
-					{
-						m.Result = (IntPtr)WindowMessages.HTCAPTION;
-					}
-					return;
-			}
-		}
+            panel_CaptionBar.MouseDown += Panel_DragMouseDown;
+            panel_ClientArea.MouseDown += Panel_DragMouseDown;
 
-		private void EnsureWindowPositionWithinScreenBounds()
-		{
-			// 현재 창이 속한 스크린을 가져옵니다.
-			Screen currentScreen = Screen.FromControl(this);
+            panel_CaptionBar.MouseMove += Panel_DragMouseMove;
+            panel_ClientArea.MouseMove += Panel_DragMouseMove;
 
-			// 스크린의 작업 영역을 가져옵니다.
-			Rectangle screenBounds = currentScreen.WorkingArea;
+            panel_CaptionBar.MouseUp += Panel_DragMouseUp;
+            panel_ClientArea.MouseUp += Panel_DragMouseUp;
+        }
 
-			// 창이 화면 영역 밖으로 나가는지 여부를 나타내는 변수입니다.
-			bool outOfBounds = false;
+        #region Function
+        private async Task FlashBorder(int duration = 300, int repeatCount = 3)
+        {
+            using (Graphics g = this.CreateGraphics())
+            {
+                g.ResetClip();
 
-			// 현재 창의 위치를 새 위치로 업데이트할 변수를 생성합니다.
-			Point newLocation = this.Location;
+                for (int i = 0; i < repeatCount; i++)
+                {
+                    using (Pen pen = new Pen(Color.IndianRed))
+                    {
+                        g.DrawRectangle(pen, _borderRect);
+                    }
+                    await Task.Delay(duration);
 
-			// 창이 화면의 왼쪽 경계를 벗어난 경우 처리합니다.
-			if (this.Left < screenBounds.Left)
-			{
-				newLocation.X = screenBounds.Left;
-				outOfBounds = true;
-			}
+                    using (Pen pen = new Pen(Colors.FormBorderColor))
+                    {
+                        g.DrawRectangle(pen, _borderRect);
+                    }
+                    await Task.Delay(duration);
+                }
+            }
+        }
 
-			// 창이 화면의 오른쪽 경계를 벗어난 경우 처리합니다.
-			if (this.Right > screenBounds.Right)
-			{
-				newLocation.X = screenBounds.Right - this.Width;
-				outOfBounds = true;
-			}
+        private async void EnsureWindowPositionWithinScreenBounds()
+        {
+            // 현재 창이 속한 스크린을 가져옵니다.
+            Screen currentScreen = Screen.FromControl(this);
 
-			// 창이 화면의 아래쪽 경계를 벗어난 경우 처리합니다.
-			if (this.Bottom > screenBounds.Bottom)
-			{
-				newLocation.Y = screenBounds.Bottom - this.Height;
-				outOfBounds = true;
-			}
+            // 스크린의 작업 영역을 가져옵니다.
+            Rectangle screenBounds = currentScreen.WorkingArea;
 
-			// 창이 화면 영역을 벗어났다면 새 위치로 이동합니다.
-			if (outOfBounds)
-			{
-				this.Location = newLocation;
-			}
-		}
+            // 창이 화면 영역 밖으로 나가는지 여부를 나타내는 변수입니다.
+            bool outOfBounds = false;
 
-		protected override void OnPaintBackground(PaintEventArgs e)
-		{
-			base.OnPaintBackground(e);
+            // 현재 창의 위치를 새 위치로 업데이트할 변수를 생성합니다.
+            Point newLocation = this.Location;
 
-			var g = e.Graphics;
+            // 창이 화면의 왼쪽 경계를 벗어난 경우 처리합니다.
+            if (this.Left < screenBounds.Left)
+            {
+                newLocation.X = screenBounds.Left;
+                outOfBounds = true;
+            }
 
-			using (var p = new Pen(Colors.FormBorderColor))
-			{
-				g.DrawRectangle(p, _borderRect);
-			}
-		}
-	}
+            // 창이 화면의 오른쪽 경계를 벗어난 경우 처리합니다.
+            if (this.Right > screenBounds.Right)
+            {
+                newLocation.X = screenBounds.Right - this.Width;
+                outOfBounds = true;
+            }
+
+            // 창이 화면의 상단 경계를 벗어난 경우 처리합니다.
+            if (this.Top < screenBounds.Top)
+            {
+                newLocation.Y = screenBounds.Top;
+                outOfBounds = true;
+            }
+
+            // 창이 화면의 아래쪽 경계를 벗어난 경우 처리합니다.
+            if (this.Bottom > screenBounds.Bottom)
+            {
+                newLocation.Y = screenBounds.Bottom - this.Height;
+                outOfBounds = true;
+            }
+
+            // 창이 화면 영역을 벗어났다면 새 위치로 이동합니다.
+            if (outOfBounds)
+            {
+                this.Location = newLocation;
+                await FlashBorder();
+            }
+        }
+        #endregion
+
+        #region Control Events
+        private void Panel_DragMouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                _isDraging = true;
+                _dragStartPoint = e.Location;
+            }
+        }
+
+        private void Panel_DragMouseMove(object sender, MouseEventArgs e)
+        {
+            if (_isDraging)
+            {
+                Point currentScreenPos = PointToScreen(e.Location);
+                this.Location = new Point(currentScreenPos.X - _dragStartPoint.X, currentScreenPos.Y - _dragStartPoint.Y);
+            }
+        }
+
+        private void Panel_DragMouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                _isDraging = false;
+                EnsureWindowPositionWithinScreenBounds();
+            }
+        }
+        #endregion
+
+        #region Override Events
+        protected override void OnPaintBackground(PaintEventArgs e)
+        {
+            base.OnPaintBackground(e);
+
+            var g = e.Graphics;
+
+            using (var p = new Pen(Colors.FormBorderColor))
+            {
+                g.DrawRectangle(p, _borderRect);
+            }
+        }
+        #endregion
+    }
 }
