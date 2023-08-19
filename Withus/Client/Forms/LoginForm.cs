@@ -33,6 +33,7 @@ namespace Client.Forms
 
             panel_CaptionBar.MouseUp += Panel_DragMouseUp;
             panel_ClientArea.MouseUp += Panel_DragMouseUp;
+
         }
 
         #region Function
@@ -137,6 +138,16 @@ namespace Client.Forms
                 EnsureWindowPositionWithinScreenBounds();
             }
         }
+
+        private void trayButton_Click(object sender, System.EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void closeButton_Click(object sender, System.EventArgs e)
+        {
+            Application.Exit();
+        }
         #endregion
 
         #region Override Events
@@ -151,6 +162,6 @@ namespace Client.Forms
                 g.DrawRectangle(p, _borderRect);
             }
         }
-        #endregion
+        #endregion        
     }
 }
