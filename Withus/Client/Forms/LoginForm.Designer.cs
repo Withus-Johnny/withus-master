@@ -32,16 +32,18 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             this.panel_Container = new System.Windows.Forms.Panel();
             this.panel_ClientArea = new System.Windows.Forms.Panel();
+            this.panel_Blank2 = new System.Windows.Forms.Panel();
+            this.panel_Blank1 = new System.Windows.Forms.Panel();
             this.pictureBox_Brand = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel_CaptionBar = new System.Windows.Forms.Panel();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.panel_Blank1 = new System.Windows.Forms.Panel();
-            this.panel_Blank2 = new System.Windows.Forms.Panel();
             this.darkTextBox_Password = new WithusUI.Controls.TextBoxs.DarkTextBox.DarkTextBox();
             this.darkTextBox_Email = new WithusUI.Controls.TextBoxs.DarkTextBox.DarkTextBox();
             this.trayButton = new WithusUI.Controls.Buttons.TrayButton.CaptionControlButton();
             this.closeButton = new WithusUI.Controls.Buttons.TrayButton.CaptionControlButton();
+            this.primeButton1 = new WithusUI.Controls.Buttons.PrimeButton.PrimeButton();
+            this.panel_Blank3 = new System.Windows.Forms.Panel();
             this.panel_Container.SuspendLayout();
             this.panel_ClientArea.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Brand)).BeginInit();
@@ -61,6 +63,8 @@
             // 
             // panel_ClientArea
             // 
+            this.panel_ClientArea.Controls.Add(this.primeButton1);
+            this.panel_ClientArea.Controls.Add(this.panel_Blank3);
             this.panel_ClientArea.Controls.Add(this.darkTextBox_Password);
             this.panel_ClientArea.Controls.Add(this.panel_Blank2);
             this.panel_ClientArea.Controls.Add(this.darkTextBox_Email);
@@ -73,6 +77,23 @@
             this.panel_ClientArea.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.panel_ClientArea.Size = new System.Drawing.Size(338, 709);
             this.panel_ClientArea.TabIndex = 1;
+            // 
+            // panel_Blank2
+            // 
+            this.panel_Blank2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel_Blank2.Location = new System.Drawing.Point(10, 274);
+            this.panel_Blank2.Name = "panel_Blank2";
+            this.panel_Blank2.Size = new System.Drawing.Size(318, 21);
+            this.panel_Blank2.TabIndex = 5;
+            // 
+            // panel_Blank1
+            // 
+            this.panel_Blank1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel_Blank1.Location = new System.Drawing.Point(10, 170);
+            this.panel_Blank1.Name = "panel_Blank1";
+            this.panel_Blank1.Size = new System.Drawing.Size(318, 70);
+            this.panel_Blank1.TabIndex = 0;
+            this.panel_Blank1.TabStop = true;
             // 
             // pictureBox_Brand
             // 
@@ -110,23 +131,6 @@
             this.notifyIcon1.Text = "notifyIcon1";
             this.notifyIcon1.Visible = true;
             // 
-            // panel_Blank1
-            // 
-            this.panel_Blank1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel_Blank1.Location = new System.Drawing.Point(10, 170);
-            this.panel_Blank1.Name = "panel_Blank1";
-            this.panel_Blank1.Size = new System.Drawing.Size(318, 50);
-            this.panel_Blank1.TabIndex = 0;
-            this.panel_Blank1.TabStop = true;
-            // 
-            // panel_Blank2
-            // 
-            this.panel_Blank2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel_Blank2.Location = new System.Drawing.Point(10, 248);
-            this.panel_Blank2.Name = "panel_Blank2";
-            this.panel_Blank2.Size = new System.Drawing.Size(318, 21);
-            this.panel_Blank2.TabIndex = 5;
-            // 
             // darkTextBox_Password
             // 
             this.darkTextBox_Password.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(17)))), ((int)(((byte)(23)))));
@@ -135,15 +139,16 @@
             this.darkTextBox_Password.BorderRadius = 5;
             this.darkTextBox_Password.BorderSize = 1;
             this.darkTextBox_Password.Dock = System.Windows.Forms.DockStyle.Top;
-            this.darkTextBox_Password.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.darkTextBox_Password.Location = new System.Drawing.Point(10, 269);
+            this.darkTextBox_Password.Font = new System.Drawing.Font("맑은 고딕", 10F);
+            this.darkTextBox_Password.ForeColor = System.Drawing.Color.Gainsboro;
+            this.darkTextBox_Password.Location = new System.Drawing.Point(10, 295);
             this.darkTextBox_Password.Multiline = false;
             this.darkTextBox_Password.Name = "darkTextBox_Password";
             this.darkTextBox_Password.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
             this.darkTextBox_Password.PasswordChar = true;
             this.darkTextBox_Password.PlaceholderColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(139)))));
             this.darkTextBox_Password.PlaceholderText = "비밀번호";
-            this.darkTextBox_Password.Size = new System.Drawing.Size(318, 28);
+            this.darkTextBox_Password.Size = new System.Drawing.Size(318, 34);
             this.darkTextBox_Password.TabIndex = 2;
             this.darkTextBox_Password.Tag = "PASSWORD";
             this.darkTextBox_Password.Texts = "";
@@ -157,15 +162,16 @@
             this.darkTextBox_Email.BorderRadius = 5;
             this.darkTextBox_Email.BorderSize = 1;
             this.darkTextBox_Email.Dock = System.Windows.Forms.DockStyle.Top;
-            this.darkTextBox_Email.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.darkTextBox_Email.Location = new System.Drawing.Point(10, 220);
+            this.darkTextBox_Email.Font = new System.Drawing.Font("맑은 고딕", 10F);
+            this.darkTextBox_Email.ForeColor = System.Drawing.Color.Gainsboro;
+            this.darkTextBox_Email.Location = new System.Drawing.Point(10, 240);
             this.darkTextBox_Email.Multiline = false;
             this.darkTextBox_Email.Name = "darkTextBox_Email";
             this.darkTextBox_Email.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
             this.darkTextBox_Email.PasswordChar = false;
             this.darkTextBox_Email.PlaceholderColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(139)))));
             this.darkTextBox_Email.PlaceholderText = "이메일 주소";
-            this.darkTextBox_Email.Size = new System.Drawing.Size(318, 28);
+            this.darkTextBox_Email.Size = new System.Drawing.Size(318, 34);
             this.darkTextBox_Email.TabIndex = 1;
             this.darkTextBox_Email.Tag = "EMAIL";
             this.darkTextBox_Email.Texts = "";
@@ -199,6 +205,39 @@
             this.closeButton.UseMnemonic = false;
             this.closeButton.UseVisualStyleBackColor = false;
             this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
+            // 
+            // primeButton1
+            // 
+            this.primeButton1.ActiveBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(90)))), ((int)(((byte)(173)))));
+            this.primeButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(116)))), ((int)(((byte)(224)))));
+            this.primeButton1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(116)))), ((int)(((byte)(224)))));
+            this.primeButton1.BorderRadius = 5;
+            this.primeButton1.BorderSize = 2;
+            this.primeButton1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.primeButton1.DefaultBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(116)))), ((int)(((byte)(224)))));
+            this.primeButton1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.primeButton1.FlatAppearance.BorderSize = 0;
+            this.primeButton1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(63)))), ((int)(((byte)(122)))));
+            this.primeButton1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(116)))), ((int)(((byte)(224)))));
+            this.primeButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.primeButton1.Font = new System.Drawing.Font("맑은 고딕", 10F);
+            this.primeButton1.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.primeButton1.HoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(166)))), ((int)(((byte)(255)))));
+            this.primeButton1.Location = new System.Drawing.Point(10, 388);
+            this.primeButton1.Name = "primeButton1";
+            this.primeButton1.Size = new System.Drawing.Size(318, 40);
+            this.primeButton1.TabIndex = 6;
+            this.primeButton1.Text = "로그인";
+            this.primeButton1.TextColor = System.Drawing.Color.WhiteSmoke;
+            this.primeButton1.UseVisualStyleBackColor = false;
+            // 
+            // panel_Blank3
+            // 
+            this.panel_Blank3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel_Blank3.Location = new System.Drawing.Point(10, 329);
+            this.panel_Blank3.Name = "panel_Blank3";
+            this.panel_Blank3.Size = new System.Drawing.Size(318, 59);
+            this.panel_Blank3.TabIndex = 6;
             // 
             // LoginForm
             // 
@@ -237,5 +276,7 @@
         private WithusUI.Controls.TextBoxs.DarkTextBox.DarkTextBox darkTextBox_Email;
         private System.Windows.Forms.Panel panel_Blank2;
         private System.Windows.Forms.Panel panel_Blank1;
+        private WithusUI.Controls.Buttons.PrimeButton.PrimeButton primeButton1;
+        private System.Windows.Forms.Panel panel_Blank3;
     }
 }

@@ -60,12 +60,17 @@ namespace WithusUI.Configs
 
         public static Color PrimeButtonActiveForeColor
         {
-            get { return Color.FromArgb(0, 63, 112); }
+            get { return Color.FromArgb(153, 178, 202); }
         }
 
         public static Color PrimeButtonActiveBorderColor
         {
             get { return Color.FromArgb(0, 90, 173); }
+        }
+
+        public static Color PrimeActiveBackGroundColor
+        {
+            get { return Color.FromArgb(0, 63, 122); }
         }
         #endregion
 

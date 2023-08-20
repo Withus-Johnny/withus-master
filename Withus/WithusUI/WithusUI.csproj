@@ -51,6 +51,9 @@
     <Compile Include="Controls\Buttons\CaptionControls\CaptionControlButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\Buttons\PrimeButton\PrimeButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\TextBoxs\DarkTextBox\DarkTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
