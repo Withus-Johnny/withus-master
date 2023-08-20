@@ -35,12 +35,15 @@ namespace Client.Forms
 
             panel_CaptionBar.MouseDown += Panel_DragMouseDown;
             panel_ClientArea.MouseDown += Panel_DragMouseDown;
+            pictureBox_Brand.MouseDown += Panel_DragMouseDown;
 
             panel_CaptionBar.MouseMove += Panel_DragMouseMove;
             panel_ClientArea.MouseMove += Panel_DragMouseMove;
+            pictureBox_Brand.MouseMove += Panel_DragMouseMove;
 
             panel_CaptionBar.MouseUp += Panel_DragMouseUp;
             panel_ClientArea.MouseUp += Panel_DragMouseUp;
+            pictureBox_Brand.MouseUp += Panel_DragMouseUp;
 
             this.Activated += LoginForm_Activated;
         }

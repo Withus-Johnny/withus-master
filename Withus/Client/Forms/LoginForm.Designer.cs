@@ -29,14 +29,19 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             this.panel_Container = new System.Windows.Forms.Panel();
             this.panel_ClientArea = new System.Windows.Forms.Panel();
             this.panel_CaptionBar = new System.Windows.Forms.Panel();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.pictureBox_Brand = new System.Windows.Forms.PictureBox();
             this.trayButton = new WithusUI.Controls.Buttons.TrayButton.CaptionControlButton();
             this.closeButton = new WithusUI.Controls.Buttons.TrayButton.CaptionControlButton();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.panel_Container.SuspendLayout();
+            this.panel_ClientArea.SuspendLayout();
             this.panel_CaptionBar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Brand)).BeginInit();
             this.SuspendLayout();
             // 
             // panel_Container
@@ -52,6 +57,8 @@
             // 
             // panel_ClientArea
             // 
+            this.panel_ClientArea.Controls.Add(this.pictureBox_Brand);
+            this.panel_ClientArea.Controls.Add(this.panel1);
             this.panel_ClientArea.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel_ClientArea.Location = new System.Drawing.Point(0, 25);
             this.panel_ClientArea.Name = "panel_ClientArea";
@@ -73,6 +80,18 @@
             // 
             this.notifyIcon1.Text = "notifyIcon1";
             this.notifyIcon1.Visible = true;
+            // 
+            // pictureBox_Brand
+            // 
+            this.pictureBox_Brand.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox_Brand.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pictureBox_Brand.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Brand.Image")));
+            this.pictureBox_Brand.Location = new System.Drawing.Point(0, 18);
+            this.pictureBox_Brand.Name = "pictureBox_Brand";
+            this.pictureBox_Brand.Size = new System.Drawing.Size(338, 152);
+            this.pictureBox_Brand.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_Brand.TabIndex = 0;
+            this.pictureBox_Brand.TabStop = false;
             // 
             // trayButton
             // 
@@ -101,6 +120,14 @@
             this.closeButton.UseVisualStyleBackColor = false;
             this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
             // 
+            // panel1
+            // 
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(338, 18);
+            this.panel1.TabIndex = 1;
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -117,7 +144,9 @@
             this.Text = "-";
             this.Load += new System.EventHandler(this.LoginForm_Load);
             this.panel_Container.ResumeLayout(false);
+            this.panel_ClientArea.ResumeLayout(false);
             this.panel_CaptionBar.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Brand)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -130,5 +159,7 @@
         private WithusUI.Controls.Buttons.TrayButton.CaptionControlButton trayButton;
         private WithusUI.Controls.Buttons.TrayButton.CaptionControlButton closeButton;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.PictureBox pictureBox_Brand;
+        private System.Windows.Forms.Panel panel1;
     }
 }
