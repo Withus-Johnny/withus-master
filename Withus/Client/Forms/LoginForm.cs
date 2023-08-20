@@ -43,9 +43,18 @@ namespace Client.Forms
 
             panel_CaptionBar.MouseUp += Panel_DragMouseUp;
             panel_ClientArea.MouseUp += Panel_DragMouseUp;
-            pictureBox_Brand.MouseUp += Panel_DragMouseUp;
+            pictureBox_Brand.MouseUp += Panel_DragMouseUp;            
 
             this.Activated += LoginForm_Activated;
+
+            panel_Blank1.MouseDown += Panel_DragMouseDown;
+            panel_Blank2.MouseDown += Panel_DragMouseDown;
+
+            panel_Blank1.MouseMove += Panel_DragMouseMove;
+            panel_Blank2.MouseMove += Panel_DragMouseMove;
+
+            panel_Blank1.MouseUp += Panel_DragMouseUp;
+            panel_Blank2.MouseUp += Panel_DragMouseUp;
         }
 
         #region Function
@@ -238,6 +247,8 @@ namespace Client.Forms
             // Fade In 처리를 위한 사전 설정
             this.Opacity = 0;
             this.WindowState = FormWindowState.Minimized;
+
+            ActiveControl = panel_Blank1;
         }
 
         private void LoginForm_Activated(object sender, EventArgs e)

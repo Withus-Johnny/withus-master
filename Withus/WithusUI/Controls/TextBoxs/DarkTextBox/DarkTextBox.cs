@@ -26,7 +26,6 @@ namespace WithusUI.Controls.TextBoxs.DarkTextBox
         private int borderSize = 2;
         private bool underlinedStyle = false;
         private bool isFocused = false;
-        private bool isInvalid = false;
         private int borderRadius = 0;
         private Color placeholderColor = Colors.DarkPlaceHolderForeColor;
         private string placeholderText = "";
@@ -182,7 +181,6 @@ namespace WithusUI.Controls.TextBoxs.DarkTextBox
             BackColor = Colors.DarkTextBoxBackGroundColor;
             ForeColor = Color.Gainsboro;
 
-            textBox1.GotFocus += TextBox1_GotFocus;
             textBox1.Enter += TextBox1_Enter;
             textBox1.Leave += TextBox1_Leave;
             textBox1.Click += TextBox1_Click;
@@ -191,14 +189,6 @@ namespace WithusUI.Controls.TextBoxs.DarkTextBox
             textBox1.MouseLeave += TextBox1_MouseLeave;
             textBox1.MouseMove += TextBox1_MouseMove;
             textBox1.KeyPress += TextBox1_KeyPress;
-        }
-
-        private void TextBox1_GotFocus(object sender, EventArgs e)
-        {
-            if (textBox1.Text == placeholderText)
-            {
-                textBox1.Select(0, 0);
-            }
         }
 
         private void TextBox1_MouseEnter(object sender, EventArgs e)
@@ -228,38 +218,6 @@ namespace WithusUI.Controls.TextBoxs.DarkTextBox
         {
             isFocused = false;
             this.Invalidate();
-
-            if (textBox1.Text != placeholderText)
-            {
-                string pattern = string.Empty;
-                string description = string.Empty;
-                string oldPlaceholderText = string.Empty;
-                if (!textBox1.UseSystemPasswordChar)
-                {
-                    pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
-                    description = "유효한 이메일을 입력하세요.";
-                    oldPlaceholderText = placeholderText;
-                }
-                else
-                {
-                    pattern = @"^(?!\s)(.{4,})$";
-                    description = "공백 제외 4자리 이상의 비밀번호를 입력하세요.";
-                    oldPlaceholderText = placeholderText;
-                }
-
-                if (!Regex.IsMatch(textBox1.Text, pattern))
-                {
-                    textBox1.Clear();
-                    isInvalid = true;
-                    placeholderText = description;
-                    SetPlaceholder();
-                }
-                else
-                {
-                    isInvalid = false;
-                    placeholderText = oldPlaceholderText;
-                }
-            }
             SetPlaceholder();
         }
 
@@ -268,7 +226,6 @@ namespace WithusUI.Controls.TextBoxs.DarkTextBox
             isFocused = true;
             this.Invalidate();
             RemovePlaceholder();
-
         }
 
         #region -> Private methods
@@ -365,18 +322,13 @@ namespace WithusUI.Controls.TextBoxs.DarkTextBox
                     this.Region = new Region(pathBorderSmooth);
                     if (borderRadius > 15) SetTextBoxRoundedRegion();
                     graph.SmoothingMode = SmoothingMode.AntiAlias;
-                    penBorder.Alignment = System.Drawing.Drawing2D.PenAlignment.Center;
+                    penBorder.Alignment = PenAlignment.Center;
                     if (isFocused)
                     {
                         penBorder.Color = borderFocusColor;
                     }
 
-                    if (isInvalid)
-                    {
-                        penBorder.Color = Colors.DarkTextBoxInvalidBorderColor;
-                    }
-
-                    if (underlinedStyle) //Line Style
+                    if (underlinedStyle)
                     {
                         graph.DrawPath(penBorderSmooth, pathBorderSmooth);
 
