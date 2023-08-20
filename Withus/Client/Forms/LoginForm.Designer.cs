@@ -32,16 +32,20 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             this.panel_Container = new System.Windows.Forms.Panel();
             this.panel_ClientArea = new System.Windows.Forms.Panel();
+            this.pictureBox_Brand = new System.Windows.Forms.PictureBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.panel_CaptionBar = new System.Windows.Forms.Panel();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.pictureBox_Brand = new System.Windows.Forms.PictureBox();
+            this.darkTextBox2 = new WithusUI.Controls.TextBoxs.DarkTextBox.DarkTextBox();
+            this.darkTextBox1 = new WithusUI.Controls.TextBoxs.DarkTextBox.DarkTextBox();
             this.trayButton = new WithusUI.Controls.Buttons.TrayButton.CaptionControlButton();
             this.closeButton = new WithusUI.Controls.Buttons.TrayButton.CaptionControlButton();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.panel_Container.SuspendLayout();
             this.panel_ClientArea.SuspendLayout();
-            this.panel_CaptionBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Brand)).BeginInit();
+            this.panel_CaptionBar.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel_Container
@@ -57,13 +61,38 @@
             // 
             // panel_ClientArea
             // 
+            this.panel_ClientArea.Controls.Add(this.darkTextBox2);
+            this.panel_ClientArea.Controls.Add(this.panel3);
+            this.panel_ClientArea.Controls.Add(this.darkTextBox1);
+            this.panel_ClientArea.Controls.Add(this.panel2);
             this.panel_ClientArea.Controls.Add(this.pictureBox_Brand);
             this.panel_ClientArea.Controls.Add(this.panel1);
             this.panel_ClientArea.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel_ClientArea.Location = new System.Drawing.Point(0, 25);
             this.panel_ClientArea.Name = "panel_ClientArea";
+            this.panel_ClientArea.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.panel_ClientArea.Size = new System.Drawing.Size(338, 709);
             this.panel_ClientArea.TabIndex = 1;
+            // 
+            // pictureBox_Brand
+            // 
+            this.pictureBox_Brand.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox_Brand.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pictureBox_Brand.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Brand.Image")));
+            this.pictureBox_Brand.Location = new System.Drawing.Point(10, 18);
+            this.pictureBox_Brand.Name = "pictureBox_Brand";
+            this.pictureBox_Brand.Size = new System.Drawing.Size(318, 152);
+            this.pictureBox_Brand.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_Brand.TabIndex = 0;
+            this.pictureBox_Brand.TabStop = false;
+            // 
+            // panel1
+            // 
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(10, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(318, 18);
+            this.panel1.TabIndex = 1;
             // 
             // panel_CaptionBar
             // 
@@ -81,17 +110,49 @@
             this.notifyIcon1.Text = "notifyIcon1";
             this.notifyIcon1.Visible = true;
             // 
-            // pictureBox_Brand
+            // darkTextBox2
             // 
-            this.pictureBox_Brand.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox_Brand.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pictureBox_Brand.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Brand.Image")));
-            this.pictureBox_Brand.Location = new System.Drawing.Point(0, 18);
-            this.pictureBox_Brand.Name = "pictureBox_Brand";
-            this.pictureBox_Brand.Size = new System.Drawing.Size(338, 152);
-            this.pictureBox_Brand.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox_Brand.TabIndex = 0;
-            this.pictureBox_Brand.TabStop = false;
+            this.darkTextBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(17)))), ((int)(((byte)(23)))));
+            this.darkTextBox2.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(107)))), ((int)(((byte)(111)))));
+            this.darkTextBox2.BorderFocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(142)))), ((int)(((byte)(255)))));
+            this.darkTextBox2.BorderRadius = 5;
+            this.darkTextBox2.BorderSize = 1;
+            this.darkTextBox2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.darkTextBox2.ForeColor = System.Drawing.Color.Gainsboro;
+            this.darkTextBox2.Location = new System.Drawing.Point(10, 269);
+            this.darkTextBox2.Multiline = false;
+            this.darkTextBox2.Name = "darkTextBox2";
+            this.darkTextBox2.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
+            this.darkTextBox2.PasswordChar = true;
+            this.darkTextBox2.PlaceholderColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(139)))));
+            this.darkTextBox2.PlaceholderText = "비밀번호";
+            this.darkTextBox2.Size = new System.Drawing.Size(318, 28);
+            this.darkTextBox2.TabIndex = 3;
+            this.darkTextBox2.Tag = "PASSWORD";
+            this.darkTextBox2.Texts = "";
+            this.darkTextBox2.UnderlinedStyle = false;
+            // 
+            // darkTextBox1
+            // 
+            this.darkTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(17)))), ((int)(((byte)(23)))));
+            this.darkTextBox1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(107)))), ((int)(((byte)(111)))));
+            this.darkTextBox1.BorderFocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(142)))), ((int)(((byte)(255)))));
+            this.darkTextBox1.BorderRadius = 5;
+            this.darkTextBox1.BorderSize = 1;
+            this.darkTextBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.darkTextBox1.ForeColor = System.Drawing.Color.Gainsboro;
+            this.darkTextBox1.Location = new System.Drawing.Point(10, 220);
+            this.darkTextBox1.Multiline = false;
+            this.darkTextBox1.Name = "darkTextBox1";
+            this.darkTextBox1.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
+            this.darkTextBox1.PasswordChar = false;
+            this.darkTextBox1.PlaceholderColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(139)))));
+            this.darkTextBox1.PlaceholderText = "이메일 주소";
+            this.darkTextBox1.Size = new System.Drawing.Size(318, 28);
+            this.darkTextBox1.TabIndex = 2;
+            this.darkTextBox1.Tag = "EMAIL";
+            this.darkTextBox1.Texts = "";
+            this.darkTextBox1.UnderlinedStyle = false;
             // 
             // trayButton
             // 
@@ -120,13 +181,21 @@
             this.closeButton.UseVisualStyleBackColor = false;
             this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
             // 
-            // panel1
+            // panel2
             // 
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(338, 18);
-            this.panel1.TabIndex = 1;
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(10, 170);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(318, 50);
+            this.panel2.TabIndex = 4;
+            // 
+            // panel3
+            // 
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(10, 248);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(318, 21);
+            this.panel3.TabIndex = 5;
             // 
             // LoginForm
             // 
@@ -145,8 +214,8 @@
             this.Load += new System.EventHandler(this.LoginForm_Load);
             this.panel_Container.ResumeLayout(false);
             this.panel_ClientArea.ResumeLayout(false);
-            this.panel_CaptionBar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Brand)).EndInit();
+            this.panel_CaptionBar.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -161,5 +230,9 @@
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.PictureBox pictureBox_Brand;
         private System.Windows.Forms.Panel panel1;
+        private WithusUI.Controls.TextBoxs.DarkTextBox.DarkTextBox darkTextBox2;
+        private WithusUI.Controls.TextBoxs.DarkTextBox.DarkTextBox darkTextBox1;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel2;
     }
 }
