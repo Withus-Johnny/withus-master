@@ -1,4 +1,5 @@
 ﻿using Client.Properties;
+using System;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -8,7 +9,14 @@ namespace Client.Forms
 {
     public partial class LoginForm : Form
     {
+
+        private Timer _fadeTimer = new Timer();
+        private const int FADE_TICK_VALUE = 25;
+        private const double FADE_OPACITY_VALUE = 0.050;
+
         private bool _isDraging = false;
+        private bool _isFading = false;
+
         private Point _dragStartPoint;
         private Rectangle _borderRect;
 
@@ -34,6 +42,7 @@ namespace Client.Forms
             panel_CaptionBar.MouseUp += Panel_DragMouseUp;
             panel_ClientArea.MouseUp += Panel_DragMouseUp;
 
+            this.Activated += LoginForm_Activated;
         }
 
         #region Function
@@ -109,9 +118,57 @@ namespace Client.Forms
                 await FlashBorder();
             }
         }
+        private void InitializeFadeIn()
+        {
+            this.WindowState = FormWindowState.Normal;
+            _isFading = true;
+            _fadeTimer.Interval = FADE_TICK_VALUE;
+            _fadeTimer.Tick += FadeInTimer_Tick;
+            _fadeTimer.Start();
+        }
+        private void InitializeFadeOut(Action callBackAction)
+        {
+            _isFading = true;
+            _fadeTimer.Interval = FADE_TICK_VALUE;
+            _fadeTimer.Tag = callBackAction;
+            _fadeTimer.Tick += FadeOutTimer_Tick;
+            _fadeTimer.Start();
+        }
         #endregion
 
-        #region Control Events
+        #region Function Event
+        private void FadeOutTimer_Tick(object sender, EventArgs e)
+        {
+            if (this.Opacity <= 0)
+            {
+                _fadeTimer.Tick -= FadeOutTimer_Tick;
+                _fadeTimer.Stop();
+                _isFading = false;
+                ((Action)_fadeTimer.Tag).Invoke();
+            }
+            else
+            {
+                this.Opacity -= FADE_OPACITY_VALUE;
+            }
+        }
+
+        private void FadeInTimer_Tick(object sender, EventArgs e)
+        {
+            if (this.Opacity == 1)
+            {
+                _fadeTimer.Tick -= FadeInTimer_Tick;
+                _fadeTimer.Stop();
+                _isFading = false;
+            }
+            else
+            {
+                this.Opacity += FADE_OPACITY_VALUE;
+            }
+        }
+
+        #endregion
+
+        #region Control Events        
         private void Panel_DragMouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -139,14 +196,53 @@ namespace Client.Forms
             }
         }
 
-        private void trayButton_Click(object sender, System.EventArgs e)
+        private void trayButton_Click(object sender, EventArgs e)
         {
+            if (!_isFading)
+            {
+                Action tryAction = new Action(() =>
+                {
+                    this.WindowState = FormWindowState.Minimized;
+                });
+                InitializeFadeOut(tryAction);
+                return;
+            }
+        }
+
+        private void closeButton_Click(object sender, EventArgs e)
+        {
+            if (_fadeTimer.Enabled)
+                return;
+
+            string exitConfirmationMessage = string.Format(SystemLanguage.ExitConfirmation_Message, this.Text);
+            DialogResult exitConfirmResult = MessageBox.Show(exitConfirmationMessage, SystemLanguage.Caption_System, MessageBoxButtons.YesNo);
+            if (exitConfirmResult == DialogResult.No)
+            {
+                return;
+            }
+            else
+            {
+                Action exitAction = new Action(() =>
+                {
+                    Application.Exit();
+                });
+                InitializeFadeOut(exitAction);
+            }
+        }
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+            // Fade In 처리를 위한 사전 설정
+            this.Opacity = 0;
             this.WindowState = FormWindowState.Minimized;
         }
 
-        private void closeButton_Click(object sender, System.EventArgs e)
+        private void LoginForm_Activated(object sender, EventArgs e)
         {
-            Application.Exit();
+            if (!_isFading && this.Opacity == 0 && this.WindowState == FormWindowState.Minimized)
+            {
+                InitializeFadeIn();
+            }
         }
         #endregion
 

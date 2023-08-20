@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Configs\Colors.cs" />
     <Compile Include="Configs\Const.cs" />
+    <Compile Include="Configs\SystemLanguage.cs" />
     <Compile Include="Controls\Buttons\ButtonState.cs" />
     <Compile Include="Controls\Buttons\CaptionControls\ButtonType.cs" />
     <Compile Include="Controls\Buttons\CaptionControls\CaptionControlButton.cs">

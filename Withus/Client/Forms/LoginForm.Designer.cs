@@ -28,9 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel_Container = new System.Windows.Forms.Panel();
             this.panel_ClientArea = new System.Windows.Forms.Panel();
             this.panel_CaptionBar = new System.Windows.Forms.Panel();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.trayButton = new WithusUI.Controls.Buttons.TrayButton.CaptionControlButton();
             this.closeButton = new WithusUI.Controls.Buttons.TrayButton.CaptionControlButton();
             this.panel_Container.SuspendLayout();
@@ -66,6 +68,11 @@
             this.panel_CaptionBar.Name = "panel_CaptionBar";
             this.panel_CaptionBar.Size = new System.Drawing.Size(338, 25);
             this.panel_CaptionBar.TabIndex = 0;
+            // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Visible = true;
             // 
             // trayButton
             // 
@@ -108,6 +115,7 @@
             this.Padding = new System.Windows.Forms.Padding(5);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "-";
+            this.Load += new System.EventHandler(this.LoginForm_Load);
             this.panel_Container.ResumeLayout(false);
             this.panel_CaptionBar.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -121,5 +129,6 @@
         private System.Windows.Forms.Panel panel_ClientArea;
         private WithusUI.Controls.Buttons.TrayButton.CaptionControlButton trayButton;
         private WithusUI.Controls.Buttons.TrayButton.CaptionControlButton closeButton;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
     }
 }
