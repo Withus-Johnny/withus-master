@@ -3,12 +3,12 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using WithusUI.Configs;
 
 namespace WithusUI.Controls.TextBoxs.DarkTextBox
 {
-    [DefaultEvent("_TextChanged")]
     public partial class DarkTextBox : UserControl
     {
         private const int EM_SETCUEBANNER = 0x1501;
@@ -16,7 +16,15 @@ namespace WithusUI.Controls.TextBoxs.DarkTextBox
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern Int32 SendMessage(IntPtr hWnd, int msg, int wParam, [MarshalAs(UnmanagedType.LPWStr)] string lParam);
 
-        public event EventHandler _TextChanged;
+        [Category("커스텀 이벤트")]
+        public event EventHandler TextChangedEvent;
+
+        [Category("커스텀 이벤트")]
+        public event KeyEventHandler KeyDownEvent;
+
+        [Category("커스텀 이벤트")]
+        public event MouseEventHandler MouseDownEvent;
+
 
         private Color borderColor = Colors.DarkTextBoxBorderColor;
         private Color borderFocusColor = Colors.DarkTextBoxFocusBorderColor;
@@ -144,6 +152,20 @@ namespace WithusUI.Controls.TextBoxs.DarkTextBox
         }
 
         [Category("커스텀 속성")]
+        public HorizontalAlignment Alignment
+        {
+            get
+            {
+                return textBox1.TextAlign;
+            }
+            set
+            {
+                textBox1.TextAlign = value;
+                textBox1.SelectionStart = textBox1.TextLength;
+            }
+        }
+
+        [Category("커스텀 속성")]
         public int BorderRadius
         {
             get { return borderRadius; }
@@ -180,9 +202,17 @@ namespace WithusUI.Controls.TextBoxs.DarkTextBox
             ForeColor = Colors.DarkTextBoxForeColor;
             textBox1.MaxLength = 30;
 
+            textBox1.ShortcutsEnabled = false;
+
+            textBox1.TextChanged += textBox1_TextChanged;
+            textBox1.KeyDown += TextBox1_KeyDown;
+
+            textBox1.MouseDown += TextBox1_MouseDown;
             textBox1.MouseHover += TextBox1_MouseHover;
             textBox1.MouseLeave += TextBox1_MouseLeave;
         }
+
+        
 
         #region Funtions
 
@@ -231,11 +261,27 @@ namespace WithusUI.Controls.TextBoxs.DarkTextBox
 
         #region Events
 
+        private void TextBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (MouseDownEvent != null)
+            {
+                MouseDownEvent.Invoke(sender, e);
+            }
+        }
+
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            if (_TextChanged != null)
+            if (TextChangedEvent != null)
             {
-                _TextChanged.Invoke(sender, e);
+                TextChangedEvent.Invoke(sender, e);
+            }
+        }
+
+        private void TextBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (KeyDownEvent != null)
+            {
+                KeyDownEvent.Invoke(sender, e);
             }
         }
 

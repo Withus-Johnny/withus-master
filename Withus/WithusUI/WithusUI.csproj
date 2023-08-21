@@ -60,6 +60,8 @@
     <Compile Include="Controls\TextBoxs\DarkTextBox\DarkTextBox.Designer.cs">
       <DependentUpon>DarkTextBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\EmailValidator.cs" />
+    <Compile Include="Helpers\PasswordHasher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
