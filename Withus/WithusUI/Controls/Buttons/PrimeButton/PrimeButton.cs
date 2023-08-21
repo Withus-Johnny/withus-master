@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WithusUI.Configs;
 
@@ -102,47 +98,15 @@ namespace WithusUI.Controls.Buttons.PrimeButton
             this.Size = new Size(150, 40);
             this.BackColor = Colors.PrimeButtonBackGroundColor;
             this.ForeColor = Color.WhiteSmoke;
+            this.Font = new Font(this.Font, FontStyle.Bold);
             this.Resize += new EventHandler(Button_Resize);
 
             this.FlatAppearance.MouseOverBackColor = Colors.PrimeButtonBackGroundColor;
             this.FlatAppearance.MouseDownBackColor = Colors.PrimeActiveBackGroundColor;
             this.borderColor = Colors.PrimeButtonBorderColor;
-
-            this.MouseDown += PrimeButton_MouseDown;
-            this.MouseUp += PrimeButton_MouseUp;
-            this.MouseHover += PrimeButton_MouseHover;
-            this.MouseLeave += PrimeButton_MouseLeave;
         }
 
-        private void PrimeButton_MouseUp(object sender, MouseEventArgs e)
-        {
-            this.ForeColor = Color.WhiteSmoke;
-        }
-
-        private void PrimeButton_MouseDown(object sender, MouseEventArgs e)
-        {
-            this.ForeColor = Colors.PrimeButtonActiveForeColor;
-        }
-
-        private void PrimeButton_MouseLeave(object sender, EventArgs e)
-        {
-            _buttonState = ButtonState.Normal;
-            borderColor = Colors.PrimeButtonBorderColor;
-        }
-
-        private void PrimeButton_MouseHover(object sender, EventArgs e)
-        {
-            _buttonState = ButtonState.Hover;
-            borderColor = Colors.PrimeButtonHoverBorderColor;
-            this.Invalidate();
-        }
-
-        private void Button_Resize(object sender, EventArgs e)
-        {
-            if (borderRadius > this.Height)
-                borderRadius = this.Height;
-        }
-
+        #region Functions
         private GraphicsPath GetFigurePath(Rectangle rect, float radius)
         {
             GraphicsPath path = new GraphicsPath();
@@ -157,6 +121,29 @@ namespace WithusUI.Controls.Buttons.PrimeButton
             return path;
         }
 
+        private void SetButtonState(ButtonState buttonState)
+        {
+            if (_buttonState != buttonState)
+            {
+                _buttonState = buttonState;
+                Invalidate();
+            }
+        }
+        #endregion
+
+        #region Events
+        private void Button_Resize(object sender, EventArgs e)
+        {
+            if (borderRadius > this.Height)
+                borderRadius = this.Height;
+        }
+        private void Container_BackColorChanged(object sender, EventArgs e)
+        {
+            this.Invalidate();
+        }
+        #endregion
+
+        #region Override
         protected override void OnPaint(PaintEventArgs pevent)
         {
             base.OnPaint(pevent);
@@ -199,16 +186,88 @@ namespace WithusUI.Controls.Buttons.PrimeButton
                 }
             }
         }
-
         protected override void OnHandleCreated(EventArgs e)
         {
             base.OnHandleCreated(e);
             this.Parent.BackColorChanged += new EventHandler(Container_BackColorChanged);
         }
-
-        private void Container_BackColorChanged(object sender, EventArgs e)
+        protected override void OnMouseMove(MouseEventArgs e)
         {
-            this.Invalidate();
+            base.OnMouseMove(e);
+
+            if (e.Button == MouseButtons.Left)
+            {
+                if (ClientRectangle.Contains(e.Location))
+                    SetButtonState(ButtonState.Pressed);
+                else
+                {
+                    SetButtonState(ButtonState.Hover);
+                }
+            }
+            else
+            {
+                borderColor = Colors.PrimeButtonHoverBorderColor;
+                SetButtonState(ButtonState.Hover);
+            }
         }
+
+        protected override void OnMouseDown(MouseEventArgs e)
+        {
+            base.OnMouseDown(e);
+
+            if (!ClientRectangle.Contains(e.Location))
+                return;
+
+            this.Font = new Font(this.Font.FontFamily, this.Font.Size + 1, this.Font.Style);
+            this.ForeColor = Colors.PrimeButtonActiveForeColor;
+            SetButtonState(ButtonState.Pressed);
+        }
+
+        protected override void OnMouseUp(MouseEventArgs e)
+        {
+            base.OnMouseUp(e);
+
+            this.Font = new Font(this.Font.FontFamily, this.Font.Size + -1, this.Font.Style);
+            this.ForeColor = Color.WhiteSmoke;
+            SetButtonState(ButtonState.Normal);
+        }
+
+        protected override void OnMouseLeave(EventArgs e)
+        {
+            base.OnMouseLeave(e);
+
+            borderColor = Colors.PrimeButtonBorderColor;
+            SetButtonState(ButtonState.Normal);
+        }
+
+        protected override void OnMouseCaptureChanged(EventArgs e)
+        {
+            base.OnMouseCaptureChanged(e);
+
+            var location = Cursor.Position;
+
+            if (!ClientRectangle.Contains(location))
+                SetButtonState(ButtonState.Normal);
+        }
+
+        protected override void OnGotFocus(EventArgs e)
+        {
+            base.OnGotFocus(e);
+
+            Invalidate();
+        }
+
+        protected override void OnLostFocus(EventArgs e)
+        {
+            base.OnLostFocus(e);
+
+            var location = Cursor.Position;
+
+            if (!ClientRectangle.Contains(location))
+                SetButtonState(ButtonState.Normal);
+            else
+                SetButtonState(ButtonState.Hover);
+        }
+        #endregion
     }
 }

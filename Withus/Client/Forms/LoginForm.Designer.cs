@@ -32,18 +32,18 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             this.panel_Container = new System.Windows.Forms.Panel();
             this.panel_ClientArea = new System.Windows.Forms.Panel();
+            this.panel_Blank3 = new System.Windows.Forms.Panel();
             this.panel_Blank2 = new System.Windows.Forms.Panel();
             this.panel_Blank1 = new System.Windows.Forms.Panel();
             this.pictureBox_Brand = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel_CaptionBar = new System.Windows.Forms.Panel();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.primeButton1 = new WithusUI.Controls.Buttons.PrimeButton.PrimeButton();
             this.darkTextBox_Password = new WithusUI.Controls.TextBoxs.DarkTextBox.DarkTextBox();
             this.darkTextBox_Email = new WithusUI.Controls.TextBoxs.DarkTextBox.DarkTextBox();
             this.trayButton = new WithusUI.Controls.Buttons.TrayButton.CaptionControlButton();
             this.closeButton = new WithusUI.Controls.Buttons.TrayButton.CaptionControlButton();
-            this.primeButton1 = new WithusUI.Controls.Buttons.PrimeButton.PrimeButton();
-            this.panel_Blank3 = new System.Windows.Forms.Panel();
             this.panel_Container.SuspendLayout();
             this.panel_ClientArea.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Brand)).BeginInit();
@@ -77,6 +77,14 @@
             this.panel_ClientArea.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.panel_ClientArea.Size = new System.Drawing.Size(338, 709);
             this.panel_ClientArea.TabIndex = 1;
+            // 
+            // panel_Blank3
+            // 
+            this.panel_Blank3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel_Blank3.Location = new System.Drawing.Point(10, 329);
+            this.panel_Blank3.Name = "panel_Blank3";
+            this.panel_Blank3.Size = new System.Drawing.Size(318, 59);
+            this.panel_Blank3.TabIndex = 6;
             // 
             // panel_Blank2
             // 
@@ -130,6 +138,31 @@
             // 
             this.notifyIcon1.Text = "notifyIcon1";
             this.notifyIcon1.Visible = true;
+            // 
+            // primeButton1
+            // 
+            this.primeButton1.ActiveBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(90)))), ((int)(((byte)(173)))));
+            this.primeButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(116)))), ((int)(((byte)(224)))));
+            this.primeButton1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(116)))), ((int)(((byte)(224)))));
+            this.primeButton1.BorderRadius = 5;
+            this.primeButton1.BorderSize = 2;
+            this.primeButton1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.primeButton1.DefaultBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(116)))), ((int)(((byte)(224)))));
+            this.primeButton1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.primeButton1.FlatAppearance.BorderSize = 0;
+            this.primeButton1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(63)))), ((int)(((byte)(122)))));
+            this.primeButton1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(116)))), ((int)(((byte)(224)))));
+            this.primeButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.primeButton1.Font = new System.Drawing.Font("맑은 고딕", 10F, System.Drawing.FontStyle.Bold);
+            this.primeButton1.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.primeButton1.HoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(166)))), ((int)(((byte)(255)))));
+            this.primeButton1.Location = new System.Drawing.Point(10, 388);
+            this.primeButton1.Name = "primeButton1";
+            this.primeButton1.Size = new System.Drawing.Size(318, 40);
+            this.primeButton1.TabIndex = 6;
+            this.primeButton1.Text = "로그인";
+            this.primeButton1.TextColor = System.Drawing.Color.WhiteSmoke;
+            this.primeButton1.UseVisualStyleBackColor = false;
             // 
             // darkTextBox_Password
             // 
@@ -205,39 +238,6 @@
             this.closeButton.UseMnemonic = false;
             this.closeButton.UseVisualStyleBackColor = false;
             this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
-            // 
-            // primeButton1
-            // 
-            this.primeButton1.ActiveBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(90)))), ((int)(((byte)(173)))));
-            this.primeButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(116)))), ((int)(((byte)(224)))));
-            this.primeButton1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(116)))), ((int)(((byte)(224)))));
-            this.primeButton1.BorderRadius = 5;
-            this.primeButton1.BorderSize = 2;
-            this.primeButton1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.primeButton1.DefaultBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(116)))), ((int)(((byte)(224)))));
-            this.primeButton1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.primeButton1.FlatAppearance.BorderSize = 0;
-            this.primeButton1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(63)))), ((int)(((byte)(122)))));
-            this.primeButton1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(116)))), ((int)(((byte)(224)))));
-            this.primeButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.primeButton1.Font = new System.Drawing.Font("맑은 고딕", 10F);
-            this.primeButton1.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.primeButton1.HoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(166)))), ((int)(((byte)(255)))));
-            this.primeButton1.Location = new System.Drawing.Point(10, 388);
-            this.primeButton1.Name = "primeButton1";
-            this.primeButton1.Size = new System.Drawing.Size(318, 40);
-            this.primeButton1.TabIndex = 6;
-            this.primeButton1.Text = "로그인";
-            this.primeButton1.TextColor = System.Drawing.Color.WhiteSmoke;
-            this.primeButton1.UseVisualStyleBackColor = false;
-            // 
-            // panel_Blank3
-            // 
-            this.panel_Blank3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel_Blank3.Location = new System.Drawing.Point(10, 329);
-            this.panel_Blank3.Name = "panel_Blank3";
-            this.panel_Blank3.Size = new System.Drawing.Size(318, 59);
-            this.panel_Blank3.TabIndex = 6;
             // 
             // LoginForm
             // 
