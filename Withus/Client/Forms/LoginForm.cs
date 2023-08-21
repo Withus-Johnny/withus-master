@@ -272,6 +272,6 @@ namespace Client.Forms
                 g.DrawRectangle(p, _borderRect);
             }
         }
-        #endregion        
+        #endregion
     }
 }

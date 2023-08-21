@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using WithusUI.Configs;
 
@@ -10,28 +11,27 @@ namespace WithusUI.Controls.TextBoxs.DarkTextBox
     [DefaultEvent("_TextChanged")]
     public partial class DarkTextBox : UserControl
     {
-        public event EventHandler _TextChanged;
+        private const int EM_SETCUEBANNER = 0x1501;
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            if (_TextChanged != null)
-            {
-                _TextChanged.Invoke(sender, e);
-            }
-        }
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        private static extern Int32 SendMessage(IntPtr hWnd, int msg, int wParam, [MarshalAs(UnmanagedType.LPWStr)] string lParam);
+
+        public event EventHandler _TextChanged;
 
         private Color borderColor = Colors.DarkTextBoxBorderColor;
         private Color borderFocusColor = Colors.DarkTextBoxFocusBorderColor;
+        private Color borderHoverColor = Color.DarkGray;
         private int borderSize = 2;
         private bool underlinedStyle = false;
         private bool isFocused = false;
+        private bool isHover = false;
         private int borderRadius = 0;
-        private Color placeholderColor = Colors.DarkPlaceHolderForeColor;
         private string placeholderText = "";
         private bool isPlaceholder = false;
         private bool isPasswordChar = false;
 
-        #region -> Properties
+        #region Properties
+
         [Category("커스텀 속성")]
         public Color BorderColor
         {
@@ -42,12 +42,14 @@ namespace WithusUI.Controls.TextBoxs.DarkTextBox
                 this.Invalidate();
             }
         }
+
         [Category("커스텀 속성")]
         public Color BorderFocusColor
         {
             get { return borderFocusColor; }
             set { borderFocusColor = value; }
         }
+
         [Category("커스텀 속성")]
         public int BorderSize
         {
@@ -61,6 +63,7 @@ namespace WithusUI.Controls.TextBoxs.DarkTextBox
                 }
             }
         }
+
         [Category("커스텀 속성")]
         public bool UnderlinedStyle
         {
@@ -71,6 +74,7 @@ namespace WithusUI.Controls.TextBoxs.DarkTextBox
                 this.Invalidate();
             }
         }
+
         [Category("커스텀 속성")]
         public bool PasswordChar
         {
@@ -82,12 +86,14 @@ namespace WithusUI.Controls.TextBoxs.DarkTextBox
                     textBox1.UseSystemPasswordChar = value;
             }
         }
+
         [Category("커스텀 속성")]
         public bool Multiline
         {
             get { return textBox1.Multiline; }
             set { textBox1.Multiline = value; }
         }
+
         [Category("커스텀 속성")]
         public override Color BackColor
         {
@@ -98,6 +104,7 @@ namespace WithusUI.Controls.TextBoxs.DarkTextBox
                 textBox1.BackColor = value;
             }
         }
+
         [Category("커스텀 속성")]
         public override Color ForeColor
         {
@@ -108,6 +115,7 @@ namespace WithusUI.Controls.TextBoxs.DarkTextBox
                 textBox1.ForeColor = value;
             }
         }
+
         [Category("커스텀 속성")]
         public override Font Font
         {
@@ -120,6 +128,7 @@ namespace WithusUI.Controls.TextBoxs.DarkTextBox
                     UpdateControlHeight();
             }
         }
+
         [Category("커스텀 속성")]
         public string Texts
         {
@@ -131,9 +140,9 @@ namespace WithusUI.Controls.TextBoxs.DarkTextBox
             set
             {
                 textBox1.Text = value;
-                SetPlaceholder();
             }
         }
+
         [Category("커스텀 속성")]
         public int BorderRadius
         {
@@ -147,17 +156,7 @@ namespace WithusUI.Controls.TextBoxs.DarkTextBox
                 }
             }
         }
-        [Category("커스텀 속성")]
-        public Color PlaceholderColor
-        {
-            get { return placeholderColor; }
-            set
-            {
-                placeholderColor = value;
-                if (isPlaceholder)
-                    textBox1.ForeColor = value;
-            }
-        }
+
         [Category("커스텀 속성")]
         public string PlaceholderText
         {
@@ -166,90 +165,27 @@ namespace WithusUI.Controls.TextBoxs.DarkTextBox
             {
                 placeholderText = value;
                 textBox1.Text = "";
-                SetPlaceholder();
             }
         }
+
         #endregion
 
         public DarkTextBox()
         {
             InitializeComponent();
             AutoScaleMode = AutoScaleMode.None;
-            Padding = new Padding(10, 7, 10, 7);
+            Padding = new Padding(14, 7, 10, 7);
             Size = new Size(250, 30);
             BackColor = Colors.DarkTextBoxBackGroundColor;
-            ForeColor = Color.Gainsboro;
+            ForeColor = Colors.DarkTextBoxForeColor;
+            textBox1.MaxLength = 30;
 
-            textBox1.Enter += TextBox1_Enter;
-            textBox1.Leave += TextBox1_Leave;
-            textBox1.Click += TextBox1_Click;
-
-            textBox1.MouseEnter += TextBox1_MouseEnter;
+            textBox1.MouseHover += TextBox1_MouseHover;
             textBox1.MouseLeave += TextBox1_MouseLeave;
-            textBox1.MouseMove += TextBox1_MouseMove;
-            textBox1.KeyPress += TextBox1_KeyPress;
         }
 
-        private void TextBox1_MouseEnter(object sender, EventArgs e)
-        {
-            this.OnMouseEnter(e);
-        }
-        private void TextBox1_MouseLeave(object sender, EventArgs e)
-        {
-            this.OnMouseLeave(e);
-        }
-        private void TextBox1_MouseMove(object sender, MouseEventArgs e)
-        {
-            this.OnMouseMove(e);
-        }
+        #region Funtions
 
-        private void TextBox1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            this.OnKeyPress(e);
-        }
-
-        private void TextBox1_Click(object sender, EventArgs e)
-        {
-            this.OnClick(e);
-        }
-
-        private void TextBox1_Leave(object sender, EventArgs e)
-        {
-            isFocused = false;
-            this.Invalidate();
-            SetPlaceholder();
-        }
-
-        private void TextBox1_Enter(object sender, EventArgs e)
-        {
-            isFocused = true;
-            this.Invalidate();
-            RemovePlaceholder();
-        }
-
-        #region -> Private methods
-        private void SetPlaceholder()
-        {
-            if (string.IsNullOrWhiteSpace(textBox1.Text) && placeholderText != "")
-            {
-                isPlaceholder = true;
-                textBox1.Text = placeholderText;
-                textBox1.ForeColor = placeholderColor;
-                if (isPasswordChar)
-                    textBox1.UseSystemPasswordChar = false;
-            }
-        }
-        private void RemovePlaceholder()
-        {
-            if (isPlaceholder && placeholderText != "")
-            {
-                isPlaceholder = false;
-                textBox1.Text = "";
-                textBox1.ForeColor = this.ForeColor;
-                if (isPasswordChar)
-                    textBox1.UseSystemPasswordChar = true;
-            }
-        }
         private GraphicsPath GetFigurePath(Rectangle rect, int radius)
         {
             GraphicsPath path = new GraphicsPath();
@@ -262,6 +198,7 @@ namespace WithusUI.Controls.TextBoxs.DarkTextBox
             path.CloseFigure();
             return path;
         }
+
         private void SetTextBoxRoundedRegion()
         {
             GraphicsPath pathTxt;
@@ -277,6 +214,7 @@ namespace WithusUI.Controls.TextBoxs.DarkTextBox
             }
             pathTxt.Dispose();
         }
+
         private void UpdateControlHeight()
         {
             if (textBox1.Multiline == false)
@@ -288,20 +226,69 @@ namespace WithusUI.Controls.TextBoxs.DarkTextBox
                 this.Height = textBox1.Height + this.Padding.Top + this.Padding.Bottom;
             }
         }
+
         #endregion
 
-        #region -> Overridden methods
+        #region Events
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (_TextChanged != null)
+            {
+                _TextChanged.Invoke(sender, e);
+            }
+        }
+
+        private void TextBox1_MouseLeave(object sender, EventArgs e)
+        {
+            if (isFocused) return;
+            isHover = false;
+            this.Invalidate();
+        }
+
+        private void TextBox1_MouseHover(object sender, EventArgs e)
+        {
+            if (!isFocused)
+            {
+                isHover = true;
+                this.Invalidate();
+            }
+        }
+
+        #endregion       
+
+        #region Overridde
+
+        protected override void OnEnter(EventArgs e)
+        {
+            base.OnEnter(e);
+            isFocused = true;
+            isHover = false;
+            this.Invalidate();
+        }
+
+        protected override void OnLeave(EventArgs e)
+        {
+            base.OnLeave(e);
+
+            isFocused = false;
+            this.Invalidate();
+        }
+
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
             if (this.DesignMode)
                 UpdateControlHeight();
         }
+
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
             UpdateControlHeight();
+            SendMessage(textBox1.Handle, EM_SETCUEBANNER, 0, placeholderText);
         }
+
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
@@ -325,6 +312,11 @@ namespace WithusUI.Controls.TextBoxs.DarkTextBox
                     if (isFocused)
                     {
                         penBorder.Color = borderFocusColor;
+                    }
+
+                    if (isHover)
+                    {
+                        penBorder.Color = borderHoverColor;
                     }
 
                     if (underlinedStyle)
@@ -357,6 +349,7 @@ namespace WithusUI.Controls.TextBoxs.DarkTextBox
                 }
             }
         }
+
         #endregion
     }
 }

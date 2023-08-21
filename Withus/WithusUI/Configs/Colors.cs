@@ -111,6 +111,11 @@ namespace WithusUI.Configs
         {
             get { return Color.FromArgb(255, 180, 0); }
         }
+
+        public static Color DarkTextBoxForeColor
+        {
+            get { return Color.FromArgb(136, 136, 139); }
+        }
         #endregion
 
         #region AlertPanel
