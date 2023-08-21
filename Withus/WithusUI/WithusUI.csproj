@@ -45,13 +45,33 @@
   <ItemGroup>
     <Compile Include="Configs\Colors.cs" />
     <Compile Include="Configs\Const.cs" />
+    <Compile Include="Configs\SystemLanguage.cs" />
     <Compile Include="Controls\Buttons\ButtonState.cs" />
     <Compile Include="Controls\Buttons\CaptionControls\ButtonType.cs" />
     <Compile Include="Controls\Buttons\CaptionControls\CaptionControlButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\Buttons\PrimeButton\PrimeButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\Labels\LinkLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\TextBoxs\DarkTextBox\DarkTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\TextBoxs\DarkTextBox\DarkTextBox.Designer.cs">
+      <DependentUpon>DarkTextBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\EmailValidator.cs" />
+    <Compile Include="Helpers\PasswordHasher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\TextBoxs\DarkTextBox\DarkTextBox.resx">
+      <DependentUpon>DarkTextBox.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

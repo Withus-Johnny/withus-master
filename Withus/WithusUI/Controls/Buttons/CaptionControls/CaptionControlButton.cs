@@ -14,7 +14,6 @@ namespace WithusUI.Controls.Buttons.TrayButton
         #region Field Region        
         private ButtonState _buttonState = ButtonState.Normal;
         private ButtonType _buttonType = ButtonType.Tray;
-        private bool _isDefault;
         private bool _spacePressed;
 
         #endregion
@@ -40,7 +39,7 @@ namespace WithusUI.Controls.Buttons.TrayButton
             }
         }
 
-        [Category("Appearance")]
+        [Category("커스텀 속성")]
         [Description("타이틀바 버튼 타입")]
         [DefaultValue(ButtonType.Tray)]
         public ButtonType ButtonType
@@ -76,18 +75,6 @@ namespace WithusUI.Controls.Buttons.TrayButton
         #endregion
 
         #region Event Handler Region
-
-        protected override void OnCreateControl()
-        {
-            base.OnCreateControl();
-
-            var form = FindForm();
-            if (form != null)
-            {
-                if (form.AcceptButton == this)
-                    _isDefault = true;
-            }
-        }
 
         protected override void OnMouseMove(MouseEventArgs e)
         {
@@ -200,16 +187,6 @@ namespace WithusUI.Controls.Buttons.TrayButton
                     SetButtonState(ButtonState.Hover);
             }
         }
-        public override void NotifyDefault(bool value)
-        {
-            base.NotifyDefault(value);
-
-            if (!DesignMode)
-                return;
-
-            _isDefault = value;
-            Invalidate();
-        }
         #endregion
 
         #region Paint Region
@@ -224,7 +201,6 @@ namespace WithusUI.Controls.Buttons.TrayButton
 
             if (Enabled)
             {
-
                 switch (_buttonState)
                 {
                     case ButtonState.Hover:

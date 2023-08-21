@@ -60,12 +60,17 @@ namespace WithusUI.Configs
 
         public static Color PrimeButtonActiveForeColor
         {
-            get { return Color.FromArgb(0, 63, 112); }
+            get { return Color.FromArgb(153, 178, 202); }
         }
 
         public static Color PrimeButtonActiveBorderColor
         {
             get { return Color.FromArgb(0, 90, 173); }
+        }
+
+        public static Color PrimeActiveBackGroundColor
+        {
+            get { return Color.FromArgb(0, 63, 122); }
         }
         #endregion
 
@@ -82,7 +87,7 @@ namespace WithusUI.Configs
 
         public static Color ServiceLabelActiveColor
         {
-            get { return Color.FromArgb(11, 166, 244); }
+            get { return Color.FromArgb(11, 116, 224); }
         }
         #endregion
 
@@ -105,6 +110,11 @@ namespace WithusUI.Configs
         public static Color DarkTextBoxInvalidBorderColor
         {
             get { return Color.FromArgb(255, 180, 0); }
+        }
+
+        public static Color DarkTextBoxForeColor
+        {
+            get { return Color.FromArgb(136, 136, 139); }
         }
         #endregion
 
