@@ -363,20 +363,6 @@ namespace Client.Forms
             this.WindowState = FormWindowState.Minimized;
 
             ActiveControl = panel_Blank1;
-
-            //쿠팡 배너
-            string coupnagBanner = "https://static.coupangcdn.com/xa/cmg_paperboy/image/1591850618537/200613_C0_%EB%A1%9C%EC%BC%93%EB%B0%B0%EC%86%A1.jpg";
-
-            // 이미지 다운로드 및 출력
-            using (WebClient webClient = new WebClient())
-            {
-                byte[] imageData = webClient.DownloadData(coupnagBanner);
-                using (MemoryStream memoryStream = new MemoryStream(imageData))
-                {
-                    Image image = Image.FromStream(memoryStream);
-                    pictureBox1.BackgroundImage = image;
-                }
-            }
         }
 
         private void LoginForm_Activated(object sender, EventArgs e)

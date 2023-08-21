@@ -41,23 +41,21 @@
             this.panel_Blank2 = new System.Windows.Forms.Panel();
             this.primeButton_Login = new WithusUI.Controls.Buttons.PrimeButton.PrimeButton();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.panel_LoginProblemContainer = new System.Windows.Forms.Panel();
+            this.linkLabel_LoginProblem = new WithusUI.Controls.Labels.LinkLabel();
             this.panel_RegisterContainer = new System.Windows.Forms.Panel();
             this.linkLabel_Register = new WithusUI.Controls.Labels.LinkLabel();
             this.panel_CaptionBar = new System.Windows.Forms.Panel();
             this.trayButton = new WithusUI.Controls.Buttons.TrayButton.CaptionControlButton();
             this.closeButton = new WithusUI.Controls.Buttons.TrayButton.CaptionControlButton();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.panel_LoginProblemContainer = new System.Windows.Forms.Panel();
-            this.linkLabel_LoginProblem = new WithusUI.Controls.Labels.LinkLabel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel_Container.SuspendLayout();
             this.panel_ClientArea.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Brand)).BeginInit();
             this.panel2.SuspendLayout();
+            this.panel_LoginProblemContainer.SuspendLayout();
             this.panel_RegisterContainer.SuspendLayout();
             this.panel_CaptionBar.SuspendLayout();
-            this.panel_LoginProblemContainer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel_Container
@@ -92,7 +90,7 @@
             // panel_Blank3
             // 
             this.panel_Blank3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_Blank3.Location = new System.Drawing.Point(10, 256);
+            this.panel_Blank3.Location = new System.Drawing.Point(10, 226);
             this.panel_Blank3.Name = "panel_Blank3";
             this.panel_Blank3.Size = new System.Drawing.Size(318, 23);
             this.panel_Blank3.TabIndex = 6;
@@ -108,7 +106,7 @@
             this.darkTextBox_Email.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.darkTextBox_Email.Font = new System.Drawing.Font("맑은 고딕", 11F);
             this.darkTextBox_Email.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(139)))));
-            this.darkTextBox_Email.Location = new System.Drawing.Point(10, 279);
+            this.darkTextBox_Email.Location = new System.Drawing.Point(10, 249);
             this.darkTextBox_Email.Multiline = false;
             this.darkTextBox_Email.Name = "darkTextBox_Email";
             this.darkTextBox_Email.Padding = new System.Windows.Forms.Padding(14, 7, 10, 7);
@@ -125,7 +123,7 @@
             // panel_Blank1
             // 
             this.panel_Blank1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_Blank1.Location = new System.Drawing.Point(10, 314);
+            this.panel_Blank1.Location = new System.Drawing.Point(10, 284);
             this.panel_Blank1.Name = "panel_Blank1";
             this.panel_Blank1.Size = new System.Drawing.Size(318, 21);
             this.panel_Blank1.TabIndex = 0;
@@ -162,7 +160,7 @@
             this.darkTextBox_Password.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.darkTextBox_Password.Font = new System.Drawing.Font("맑은 고딕", 11F);
             this.darkTextBox_Password.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(139)))));
-            this.darkTextBox_Password.Location = new System.Drawing.Point(10, 335);
+            this.darkTextBox_Password.Location = new System.Drawing.Point(10, 305);
             this.darkTextBox_Password.Multiline = false;
             this.darkTextBox_Password.Name = "darkTextBox_Password";
             this.darkTextBox_Password.Padding = new System.Windows.Forms.Padding(14, 7, 10, 7);
@@ -177,9 +175,9 @@
             // panel_Blank2
             // 
             this.panel_Blank2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_Blank2.Location = new System.Drawing.Point(10, 370);
+            this.panel_Blank2.Location = new System.Drawing.Point(10, 340);
             this.panel_Blank2.Name = "panel_Blank2";
-            this.panel_Blank2.Size = new System.Drawing.Size(318, 21);
+            this.panel_Blank2.Size = new System.Drawing.Size(318, 50);
             this.panel_Blank2.TabIndex = 5;
             // 
             // primeButton_Login
@@ -199,7 +197,7 @@
             this.primeButton_Login.Font = new System.Drawing.Font("맑은 고딕", 10F, System.Drawing.FontStyle.Bold);
             this.primeButton_Login.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.primeButton_Login.HoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(166)))), ((int)(((byte)(255)))));
-            this.primeButton_Login.Location = new System.Drawing.Point(10, 391);
+            this.primeButton_Login.Location = new System.Drawing.Point(10, 390);
             this.primeButton_Login.Name = "primeButton_Login";
             this.primeButton_Login.Size = new System.Drawing.Size(318, 40);
             this.primeButton_Login.TabIndex = 6;
@@ -210,24 +208,43 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Controls.Add(this.panel_LoginProblemContainer);
             this.panel2.Controls.Add(this.panel_RegisterContainer);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(10, 431);
+            this.panel2.Location = new System.Drawing.Point(10, 430);
             this.panel2.Name = "panel2";
-            this.panel2.Padding = new System.Windows.Forms.Padding(0, 15, 0, 10);
-            this.panel2.Size = new System.Drawing.Size(318, 291);
+            this.panel2.Padding = new System.Windows.Forms.Padding(0, 55, 0, 10);
+            this.panel2.Size = new System.Drawing.Size(318, 292);
             this.panel2.TabIndex = 1;
             this.panel2.TabStop = true;
+            // 
+            // panel_LoginProblemContainer
+            // 
+            this.panel_LoginProblemContainer.Controls.Add(this.linkLabel_LoginProblem);
+            this.panel_LoginProblemContainer.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel_LoginProblemContainer.Location = new System.Drawing.Point(0, 90);
+            this.panel_LoginProblemContainer.Name = "panel_LoginProblemContainer";
+            this.panel_LoginProblemContainer.Size = new System.Drawing.Size(318, 35);
+            this.panel_LoginProblemContainer.TabIndex = 2;
+            // 
+            // linkLabel_LoginProblem
+            // 
+            this.linkLabel_LoginProblem.AutoSize = true;
+            this.linkLabel_LoginProblem.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Bold);
+            this.linkLabel_LoginProblem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(142)))), ((int)(((byte)(255)))));
+            this.linkLabel_LoginProblem.Location = new System.Drawing.Point(88, 6);
+            this.linkLabel_LoginProblem.Name = "linkLabel_LoginProblem";
+            this.linkLabel_LoginProblem.Size = new System.Drawing.Size(134, 21);
+            this.linkLabel_LoginProblem.TabIndex = 0;
+            this.linkLabel_LoginProblem.Text = "로그인 문제 해결";
             // 
             // panel_RegisterContainer
             // 
             this.panel_RegisterContainer.Controls.Add(this.linkLabel_Register);
             this.panel_RegisterContainer.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel_RegisterContainer.Location = new System.Drawing.Point(0, 15);
+            this.panel_RegisterContainer.Location = new System.Drawing.Point(0, 55);
             this.panel_RegisterContainer.Name = "panel_RegisterContainer";
-            this.panel_RegisterContainer.Size = new System.Drawing.Size(318, 41);
+            this.panel_RegisterContainer.Size = new System.Drawing.Size(318, 35);
             this.panel_RegisterContainer.TabIndex = 1;
             // 
             // linkLabel_Register
@@ -235,7 +252,7 @@
             this.linkLabel_Register.AutoSize = true;
             this.linkLabel_Register.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Bold);
             this.linkLabel_Register.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(142)))), ((int)(((byte)(255)))));
-            this.linkLabel_Register.Location = new System.Drawing.Point(103, 11);
+            this.linkLabel_Register.Location = new System.Drawing.Point(97, 6);
             this.linkLabel_Register.Name = "linkLabel_Register";
             this.linkLabel_Register.Size = new System.Drawing.Size(118, 21);
             this.linkLabel_Register.TabIndex = 0;
@@ -286,38 +303,6 @@
             this.notifyIcon1.Text = "notifyIcon1";
             this.notifyIcon1.Visible = true;
             // 
-            // panel_LoginProblemContainer
-            // 
-            this.panel_LoginProblemContainer.Controls.Add(this.linkLabel_LoginProblem);
-            this.panel_LoginProblemContainer.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel_LoginProblemContainer.Location = new System.Drawing.Point(0, 56);
-            this.panel_LoginProblemContainer.Name = "panel_LoginProblemContainer";
-            this.panel_LoginProblemContainer.Size = new System.Drawing.Size(318, 42);
-            this.panel_LoginProblemContainer.TabIndex = 2;
-            // 
-            // linkLabel_LoginProblem
-            // 
-            this.linkLabel_LoginProblem.AutoSize = true;
-            this.linkLabel_LoginProblem.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Bold);
-            this.linkLabel_LoginProblem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(142)))), ((int)(((byte)(255)))));
-            this.linkLabel_LoginProblem.Location = new System.Drawing.Point(94, 12);
-            this.linkLabel_LoginProblem.Name = "linkLabel_LoginProblem";
-            this.linkLabel_LoginProblem.Size = new System.Drawing.Size(134, 21);
-            this.linkLabel_LoginProblem.TabIndex = 0;
-            this.linkLabel_LoginProblem.Text = "로그인 문제 해결";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 185);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(318, 96);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
-            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -337,12 +322,11 @@
             this.panel_ClientArea.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Brand)).EndInit();
             this.panel2.ResumeLayout(false);
+            this.panel_LoginProblemContainer.ResumeLayout(false);
+            this.panel_LoginProblemContainer.PerformLayout();
             this.panel_RegisterContainer.ResumeLayout(false);
             this.panel_RegisterContainer.PerformLayout();
             this.panel_CaptionBar.ResumeLayout(false);
-            this.panel_LoginProblemContainer.ResumeLayout(false);
-            this.panel_LoginProblemContainer.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -368,6 +352,5 @@
         private System.Windows.Forms.Panel panel_RegisterContainer;
         private System.Windows.Forms.Panel panel_LoginProblemContainer;
         private WithusUI.Controls.Labels.LinkLabel linkLabel_LoginProblem;
-        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
