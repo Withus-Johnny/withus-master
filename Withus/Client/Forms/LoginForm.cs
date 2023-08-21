@@ -1,6 +1,8 @@
 ﻿using Client.Properties;
 using System;
 using System.Drawing;
+using System.IO;
+using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WithusUI.Configs;
@@ -58,8 +60,18 @@ namespace Client.Forms
 
             panel_Blank1.MouseUp += Panel_DragMouseUp;
             panel_Blank2.MouseUp += Panel_DragMouseUp;
+
+            linkLabel_Register.Paint += LinkLabel_Register_Paint;
+            linkLabel_LoginProblem.Paint += LinkLabel_LoginProblem_Paint;
         }
 
+        private void LinkLabel_LoginProblem_Paint(object sender, PaintEventArgs e)
+        {
+            int x = (panel_LoginProblemContainer.Width - linkLabel_LoginProblem.Width) / 2;
+            int y = (panel_LoginProblemContainer.Height - linkLabel_LoginProblem.Height) / 2;
+
+            linkLabel_LoginProblem.Location = new Point(x, y);
+        }
         #region Function
 
         private async Task FlashBorder(int duration = 150, int repeatCount = 3)
@@ -186,6 +198,13 @@ namespace Client.Forms
         #endregion
 
         #region Control Events   
+        private void LinkLabel_Register_Paint(object sender, PaintEventArgs e)
+        {
+            int x = (panel_RegisterContainer.Width - linkLabel_Register.Width) / 2;
+            int y = (panel_RegisterContainer.Height - linkLabel_Register.Height) / 2;
+
+            linkLabel_Register.Location = new Point(x, y);
+        }
 
         private void darkTextBox_Email_MouseDownEvent(object sender, MouseEventArgs e)
         {
@@ -344,6 +363,20 @@ namespace Client.Forms
             this.WindowState = FormWindowState.Minimized;
 
             ActiveControl = panel_Blank1;
+
+            //쿠팡 배너
+            string coupnagBanner = "https://static.coupangcdn.com/xa/cmg_paperboy/image/1591850618537/200613_C0_%EB%A1%9C%EC%BC%93%EB%B0%B0%EC%86%A1.jpg";
+
+            // 이미지 다운로드 및 출력
+            using (WebClient webClient = new WebClient())
+            {
+                byte[] imageData = webClient.DownloadData(coupnagBanner);
+                using (MemoryStream memoryStream = new MemoryStream(imageData))
+                {
+                    Image image = Image.FromStream(memoryStream);
+                    pictureBox1.BackgroundImage = image;
+                }
+            }
         }
 
         private void LoginForm_Activated(object sender, EventArgs e)
@@ -367,6 +400,6 @@ namespace Client.Forms
                 g.DrawRectangle(p, _borderRect);
             }
         }
-        #endregion        
+        #endregion
     }
 }

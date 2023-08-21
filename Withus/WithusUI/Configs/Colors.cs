@@ -87,7 +87,7 @@ namespace WithusUI.Configs
 
         public static Color ServiceLabelActiveColor
         {
-            get { return Color.FromArgb(11, 166, 244); }
+            get { return Color.FromArgb(11, 116, 224); }
         }
         #endregion
 
