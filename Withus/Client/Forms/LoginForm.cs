@@ -156,7 +156,8 @@ namespace Client.Forms
                 await FlashBorder();
             }
         }
-        private void InitializeFadeIn()
+
+        public void InitializeFadeIn()
         {
             this.WindowState = FormWindowState.Normal;
             _isFading = true;
@@ -164,7 +165,7 @@ namespace Client.Forms
             _fadeTimer.Tick += FadeInTimer_Tick;
             _fadeTimer.Start();
         }
-        private void InitializeFadeOut(Action callBackAction)
+        public void InitializeFadeOut(Action callBackAction)
         {
             _isFading = true;
             _fadeTimer.Interval = FADE_TICK_VALUE;
@@ -404,12 +405,21 @@ namespace Client.Forms
 
         private void linkLabel_Register_Click(object sender, EventArgs e)
         {
-            Action hideAction = new Action(() => {
-                this.Hide();
+            Action hideAction = new Action(() =>
+            {
+                if (Program.registerForm == null)
+                {
+                    this.Hide();
+                    Program.registerForm = new RegisterForm();
+                    Program.registerForm.Disposed += (o1, e1) =>
+                    {
+                        Console.WriteLine("회원가입 종료 됨");
+                        Program.registerForm = null;
+                    };
+                    Program.registerForm.Show();
+                }
             });
             InitializeFadeOut(hideAction);
-
-            // 회원 가입 폼 호출
         }
     }
 }
