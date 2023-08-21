@@ -183,7 +183,11 @@ namespace Client.Forms
                 _fadeTimer.Tick -= FadeOutTimer_Tick;
                 _fadeTimer.Stop();
                 _isFading = false;
-                ((Action)_fadeTimer.Tag).Invoke();
+                if (((Action)_fadeTimer.Tag != null))
+                {
+                    ((Action)_fadeTimer.Tag).Invoke();
+                }
+
             }
             else
             {
@@ -397,5 +401,15 @@ namespace Client.Forms
             }
         }
         #endregion
+
+        private void linkLabel_Register_Click(object sender, EventArgs e)
+        {
+            Action hideAction = new Action(() => {
+                this.Hide();
+            });
+            InitializeFadeOut(hideAction);
+
+            // 회원 가입 폼 호출
+        }
     }
 }

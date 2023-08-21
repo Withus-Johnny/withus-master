@@ -256,6 +256,7 @@
             this.linkLabel_Register.Size = new System.Drawing.Size(118, 21);
             this.linkLabel_Register.TabIndex = 0;
             this.linkLabel_Register.Text = "무료 회원 가입";
+            this.linkLabel_Register.Click += new System.EventHandler(this.linkLabel_Register_Click);
             // 
             // panel_CaptionBar
             // 

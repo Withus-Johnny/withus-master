@@ -14,6 +14,7 @@ namespace WithusUI.Controls.Labels
         {
             this.Font = new Font("맑은 고딕", 12, FontStyle.Bold);
             this.ForeColor = Colors.ServiceLabelForeColor;
+            this.Cursor = Cursors.Hand;
 
             this.MouseDown += LinkLabel_MouseDown;
             this.MouseUp += LinkLabel_MouseUp;
