@@ -32,15 +32,15 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             this.panel_Container = new System.Windows.Forms.Panel();
             this.panel_ClientArea = new System.Windows.Forms.Panel();
-            this.panel_Blank3 = new System.Windows.Forms.Panel();
-            this.darkTextBox_Email = new WithusUI.Controls.TextBoxs.DarkTextBox.DarkTextBox();
             this.panel_Blank1 = new System.Windows.Forms.Panel();
+            this.darkTextBox_Email = new WithusUI.Controls.TextBoxs.DarkTextBox.DarkTextBox();
+            this.panel_Blank2 = new System.Windows.Forms.Panel();
             this.pictureBox_Brand = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.darkTextBox_Password = new WithusUI.Controls.TextBoxs.DarkTextBox.DarkTextBox();
-            this.panel_Blank2 = new System.Windows.Forms.Panel();
+            this.panel_Blank3 = new System.Windows.Forms.Panel();
             this.primeButton_Login = new WithusUI.Controls.Buttons.PrimeButton.PrimeButton();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel_Blank4 = new System.Windows.Forms.Panel();
             this.panel_LoginProblemContainer = new System.Windows.Forms.Panel();
             this.linkLabel_LoginProblem = new WithusUI.Controls.Labels.LinkLabel();
             this.panel_RegisterContainer = new System.Windows.Forms.Panel();
@@ -52,7 +52,7 @@
             this.panel_Container.SuspendLayout();
             this.panel_ClientArea.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Brand)).BeginInit();
-            this.panel2.SuspendLayout();
+            this.panel_Blank4.SuspendLayout();
             this.panel_LoginProblemContainer.SuspendLayout();
             this.panel_RegisterContainer.SuspendLayout();
             this.panel_CaptionBar.SuspendLayout();
@@ -71,15 +71,15 @@
             // 
             // panel_ClientArea
             // 
-            this.panel_ClientArea.Controls.Add(this.panel_Blank3);
-            this.panel_ClientArea.Controls.Add(this.darkTextBox_Email);
             this.panel_ClientArea.Controls.Add(this.panel_Blank1);
+            this.panel_ClientArea.Controls.Add(this.darkTextBox_Email);
+            this.panel_ClientArea.Controls.Add(this.panel_Blank2);
             this.panel_ClientArea.Controls.Add(this.pictureBox_Brand);
             this.panel_ClientArea.Controls.Add(this.panel1);
             this.panel_ClientArea.Controls.Add(this.darkTextBox_Password);
-            this.panel_ClientArea.Controls.Add(this.panel_Blank2);
+            this.panel_ClientArea.Controls.Add(this.panel_Blank3);
             this.panel_ClientArea.Controls.Add(this.primeButton_Login);
-            this.panel_ClientArea.Controls.Add(this.panel2);
+            this.panel_ClientArea.Controls.Add(this.panel_Blank4);
             this.panel_ClientArea.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel_ClientArea.Location = new System.Drawing.Point(0, 25);
             this.panel_ClientArea.Name = "panel_ClientArea";
@@ -87,13 +87,13 @@
             this.panel_ClientArea.Size = new System.Drawing.Size(338, 722);
             this.panel_ClientArea.TabIndex = 1;
             // 
-            // panel_Blank3
+            // panel_Blank1
             // 
-            this.panel_Blank3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_Blank3.Location = new System.Drawing.Point(10, 226);
-            this.panel_Blank3.Name = "panel_Blank3";
-            this.panel_Blank3.Size = new System.Drawing.Size(318, 23);
-            this.panel_Blank3.TabIndex = 6;
+            this.panel_Blank1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel_Blank1.Location = new System.Drawing.Point(10, 226);
+            this.panel_Blank1.Name = "panel_Blank1";
+            this.panel_Blank1.Size = new System.Drawing.Size(318, 23);
+            this.panel_Blank1.TabIndex = 6;
             // 
             // darkTextBox_Email
             // 
@@ -120,14 +120,13 @@
             this.darkTextBox_Email.KeyDownEvent += new System.Windows.Forms.KeyEventHandler(this.darkTextBox_Email_KeyDownEvent);
             this.darkTextBox_Email.MouseDownEvent += new System.Windows.Forms.MouseEventHandler(this.darkTextBox_Email_MouseDownEvent);
             // 
-            // panel_Blank1
+            // panel_Blank2
             // 
-            this.panel_Blank1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_Blank1.Location = new System.Drawing.Point(10, 284);
-            this.panel_Blank1.Name = "panel_Blank1";
-            this.panel_Blank1.Size = new System.Drawing.Size(318, 21);
-            this.panel_Blank1.TabIndex = 0;
-            this.panel_Blank1.TabStop = true;
+            this.panel_Blank2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel_Blank2.Location = new System.Drawing.Point(10, 284);
+            this.panel_Blank2.Name = "panel_Blank2";
+            this.panel_Blank2.Size = new System.Drawing.Size(318, 21);
+            this.panel_Blank2.TabIndex = 0;
             // 
             // pictureBox_Brand
             // 
@@ -172,13 +171,13 @@
             this.darkTextBox_Password.UnderlinedStyle = false;
             this.darkTextBox_Password.TextChangedEvent += new System.EventHandler(this.darkTextBox_Password_TextChangedEvent);
             // 
-            // panel_Blank2
+            // panel_Blank3
             // 
-            this.panel_Blank2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_Blank2.Location = new System.Drawing.Point(10, 340);
-            this.panel_Blank2.Name = "panel_Blank2";
-            this.panel_Blank2.Size = new System.Drawing.Size(318, 50);
-            this.panel_Blank2.TabIndex = 5;
+            this.panel_Blank3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel_Blank3.Location = new System.Drawing.Point(10, 340);
+            this.panel_Blank3.Name = "panel_Blank3";
+            this.panel_Blank3.Size = new System.Drawing.Size(318, 50);
+            this.panel_Blank3.TabIndex = 5;
             // 
             // primeButton_Login
             // 
@@ -206,17 +205,17 @@
             this.primeButton_Login.UseVisualStyleBackColor = false;
             this.primeButton_Login.Click += new System.EventHandler(this.primeButton_Login_Click);
             // 
-            // panel2
+            // panel_Blank4
             // 
-            this.panel2.Controls.Add(this.panel_LoginProblemContainer);
-            this.panel2.Controls.Add(this.panel_RegisterContainer);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(10, 430);
-            this.panel2.Name = "panel2";
-            this.panel2.Padding = new System.Windows.Forms.Padding(0, 55, 0, 10);
-            this.panel2.Size = new System.Drawing.Size(318, 292);
-            this.panel2.TabIndex = 1;
-            this.panel2.TabStop = true;
+            this.panel_Blank4.Controls.Add(this.panel_LoginProblemContainer);
+            this.panel_Blank4.Controls.Add(this.panel_RegisterContainer);
+            this.panel_Blank4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel_Blank4.Location = new System.Drawing.Point(10, 430);
+            this.panel_Blank4.Name = "panel_Blank4";
+            this.panel_Blank4.Padding = new System.Windows.Forms.Padding(0, 55, 0, 10);
+            this.panel_Blank4.Size = new System.Drawing.Size(318, 292);
+            this.panel_Blank4.TabIndex = 1;
+            this.panel_Blank4.TabStop = true;
             // 
             // panel_LoginProblemContainer
             // 
@@ -321,7 +320,7 @@
             this.panel_Container.ResumeLayout(false);
             this.panel_ClientArea.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Brand)).EndInit();
-            this.panel2.ResumeLayout(false);
+            this.panel_Blank4.ResumeLayout(false);
             this.panel_LoginProblemContainer.ResumeLayout(false);
             this.panel_LoginProblemContainer.PerformLayout();
             this.panel_RegisterContainer.ResumeLayout(false);
@@ -341,13 +340,13 @@
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.PictureBox pictureBox_Brand;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel_Blank2;
-        private System.Windows.Forms.Panel panel_Blank1;
-        private WithusUI.Controls.Buttons.PrimeButton.PrimeButton primeButton_Login;
         private System.Windows.Forms.Panel panel_Blank3;
+        private System.Windows.Forms.Panel panel_Blank2;
+        private WithusUI.Controls.Buttons.PrimeButton.PrimeButton primeButton_Login;
+        private System.Windows.Forms.Panel panel_Blank1;
         private WithusUI.Controls.TextBoxs.DarkTextBox.DarkTextBox darkTextBox_Email;
         private WithusUI.Controls.TextBoxs.DarkTextBox.DarkTextBox darkTextBox_Password;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel_Blank4;
         private WithusUI.Controls.Labels.LinkLabel linkLabel_Register;
         private System.Windows.Forms.Panel panel_RegisterContainer;
         private System.Windows.Forms.Panel panel_LoginProblemContainer;

@@ -1,8 +1,6 @@
 ﻿using Client.Properties;
 using System;
 using System.Drawing;
-using System.IO;
-using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WithusUI.Configs;
@@ -54,12 +52,24 @@ namespace Client.Forms
 
             panel_Blank1.MouseDown += Panel_DragMouseDown;
             panel_Blank2.MouseDown += Panel_DragMouseDown;
+            panel_Blank3.MouseDown += Panel_DragMouseDown;
+            panel_Blank4.MouseDown += Panel_DragMouseDown;
+            panel_RegisterContainer.MouseDown += Panel_DragMouseDown;
+            panel_LoginProblemContainer.MouseDown += Panel_DragMouseDown;
 
             panel_Blank1.MouseMove += Panel_DragMouseMove;
             panel_Blank2.MouseMove += Panel_DragMouseMove;
+            panel_Blank3.MouseMove += Panel_DragMouseMove;
+            panel_Blank4.MouseMove += Panel_DragMouseMove;
+            panel_RegisterContainer.MouseMove += Panel_DragMouseMove;
+            panel_LoginProblemContainer.MouseMove += Panel_DragMouseMove;
 
             panel_Blank1.MouseUp += Panel_DragMouseUp;
             panel_Blank2.MouseUp += Panel_DragMouseUp;
+            panel_Blank3.MouseUp += Panel_DragMouseUp;
+            panel_Blank4.MouseUp += Panel_DragMouseUp;
+            panel_RegisterContainer.MouseUp += Panel_DragMouseUp;
+            panel_LoginProblemContainer.MouseUp += Panel_DragMouseUp;
 
             linkLabel_Register.Paint += LinkLabel_Register_Paint;
             linkLabel_LoginProblem.Paint += LinkLabel_LoginProblem_Paint;
@@ -291,7 +301,7 @@ namespace Client.Forms
                 darkTextBox_Email.Enabled = false;
                 darkTextBox_Password.Enabled = false;
                 primeButton_Login.Enabled = false;
-                this.ActiveControl = panel_Blank1;
+                this.ActiveControl = panel_Blank2;
             }
         }
 
@@ -362,7 +372,7 @@ namespace Client.Forms
             this.Opacity = 0;
             this.WindowState = FormWindowState.Minimized;
 
-            ActiveControl = panel_Blank1;
+            ActiveControl = panel_Blank2;
         }
 
         private void LoginForm_Activated(object sender, EventArgs e)
