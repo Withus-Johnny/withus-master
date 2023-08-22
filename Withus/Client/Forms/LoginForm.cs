@@ -1,27 +1,26 @@
 ﻿using Client.Properties;
 using System;
 using System.Drawing;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WithusUI.Configs;
+using WithusUI.Effects.FadeEffect;
+using WithusUI.Effects.FlashBoarder;
 using WithusUI.Helpers;
 
 namespace Client.Forms
 {
     public partial class LoginForm : Form
     {
-        private Timer _fadeTimer = new Timer();
-        private const int FADE_TICK_VALUE = 25;
-        private const double FADE_OPACITY_VALUE = 0.050;
-
         private bool _isDraging = false;
-        private bool _isFading = false;
 
         private Point _dragStartPoint;
         private Rectangle _borderRect;
 
         private bool _isEmailValid = false;
         private bool _isPasswordValid = false;
+
+        IFadeEffect fadeEffect;
+        IFlashBorder flashBorder;
 
         public LoginForm()
         {
@@ -34,8 +33,14 @@ namespace Client.Forms
             this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             this.FormBorderStyle = FormBorderStyle.None;
             this.BackColor = Colors.FormBackGroundColor;
+            this.SetStyle(ControlStyles.DoubleBuffer, true);
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            this.SetStyle(ControlStyles.UserPaint, true);
+            UpdateStyles();
+
             _borderRect = new Rectangle(ClientRectangle.Location, new Size(ClientRectangle.Width - 1, ClientRectangle.Height - 1));
 
+            #region 이벤트 구독
             panel_CaptionBar.MouseDown += Panel_DragMouseDown;
             panel_ClientArea.MouseDown += Panel_DragMouseDown;
             pictureBox_Brand.MouseDown += Panel_DragMouseDown;
@@ -47,8 +52,6 @@ namespace Client.Forms
             panel_CaptionBar.MouseUp += Panel_DragMouseUp;
             panel_ClientArea.MouseUp += Panel_DragMouseUp;
             pictureBox_Brand.MouseUp += Panel_DragMouseUp;
-
-            this.Activated += LoginForm_Activated;
 
             panel_Blank1.MouseDown += Panel_DragMouseDown;
             panel_Blank2.MouseDown += Panel_DragMouseDown;
@@ -73,6 +76,19 @@ namespace Client.Forms
 
             linkLabel_Register.Paint += LinkLabel_Register_Paint;
             linkLabel_LoginProblem.Paint += LinkLabel_LoginProblem_Paint;
+            #endregion
+
+            fadeEffect = new FadeEffect();
+            flashBorder = new FlashBorder();
+        }
+
+        #region Control Events
+
+        private async void linkLabel_Register_Click(object sender, EventArgs e)
+        {
+            await fadeEffect.FormFadeOutAsync(this);            
+            this.Close();
+            // 회원 가입 폼 호출
         }
 
         private void LinkLabel_LoginProblem_Paint(object sender, PaintEventArgs e)
@@ -82,136 +98,7 @@ namespace Client.Forms
 
             linkLabel_LoginProblem.Location = new Point(x, y);
         }
-        #region Function
 
-        private async Task FlashBorder(int duration = 150, int repeatCount = 3)
-        {
-            using (Graphics g = this.CreateGraphics())
-            {
-                g.ResetClip();
-
-                for (int i = 0; i < repeatCount; i++)
-                {
-                    using (Pen pen = new Pen(Color.IndianRed))
-                    {
-                        g.DrawRectangle(pen, _borderRect);
-                    }
-                    await Task.Delay(duration);
-
-                    using (Pen pen = new Pen(Colors.FormBorderColor))
-                    {
-                        g.DrawRectangle(pen, _borderRect);
-                    }
-                    await Task.Delay(duration);
-                }
-            }
-        }
-
-        private async void EnsureWindowPositionWithinScreenBounds()
-        {
-            // 현재 창이 속한 스크린을 가져옵니다.
-            Screen currentScreen = Screen.FromControl(this);
-
-            // 스크린의 작업 영역을 가져옵니다.
-            Rectangle screenBounds = currentScreen.WorkingArea;
-
-            // 창이 화면 영역 밖으로 나가는지 여부를 나타내는 변수입니다.
-            bool outOfBounds = false;
-
-            // 현재 창의 위치를 새 위치로 업데이트할 변수를 생성합니다.
-            Point newLocation = this.Location;
-
-            // 창이 화면의 왼쪽 경계를 벗어난 경우 처리합니다.
-            if (this.Left < screenBounds.Left)
-            {
-                newLocation.X = screenBounds.Left;
-                outOfBounds = true;
-            }
-
-            // 창이 화면의 오른쪽 경계를 벗어난 경우 처리합니다.
-            if (this.Right > screenBounds.Right)
-            {
-                newLocation.X = screenBounds.Right - this.Width;
-                outOfBounds = true;
-            }
-
-            // 창이 화면의 상단 경계를 벗어난 경우 처리합니다.
-            if (this.Top < screenBounds.Top)
-            {
-                newLocation.Y = screenBounds.Top;
-                outOfBounds = true;
-            }
-
-            // 창이 화면의 아래쪽 경계를 벗어난 경우 처리합니다.
-            if (this.Bottom > screenBounds.Bottom)
-            {
-                newLocation.Y = screenBounds.Bottom - this.Height;
-                outOfBounds = true;
-            }
-
-            // 창이 화면 영역을 벗어났다면 새 위치로 이동합니다.
-            if (outOfBounds)
-            {
-                this.Location = newLocation;
-                await FlashBorder();
-            }
-        }
-        private void InitializeFadeIn()
-        {
-            this.WindowState = FormWindowState.Normal;
-            _isFading = true;
-            _fadeTimer.Interval = FADE_TICK_VALUE;
-            _fadeTimer.Tick += FadeInTimer_Tick;
-            _fadeTimer.Start();
-        }
-        private void InitializeFadeOut(Action callBackAction)
-        {
-            _isFading = true;
-            _fadeTimer.Interval = FADE_TICK_VALUE;
-            _fadeTimer.Tag = callBackAction;
-            _fadeTimer.Tick += FadeOutTimer_Tick;
-            _fadeTimer.Start();
-        }
-
-        #endregion
-
-        #region Function Event
-        private void FadeOutTimer_Tick(object sender, EventArgs e)
-        {
-            if (this.Opacity <= 0)
-            {
-                _fadeTimer.Tick -= FadeOutTimer_Tick;
-                _fadeTimer.Stop();
-                _isFading = false;
-                if (((Action)_fadeTimer.Tag != null))
-                {
-                    ((Action)_fadeTimer.Tag).Invoke();
-                }
-
-            }
-            else
-            {
-                this.Opacity -= FADE_OPACITY_VALUE;
-            }
-        }
-
-        private void FadeInTimer_Tick(object sender, EventArgs e)
-        {
-            if (this.Opacity == 1)
-            {
-                _fadeTimer.Tick -= FadeInTimer_Tick;
-                _fadeTimer.Stop();
-                _isFading = false;
-            }
-            else
-            {
-                this.Opacity += FADE_OPACITY_VALUE;
-            }
-        }
-
-        #endregion
-
-        #region Control Events   
         private void LinkLabel_Register_Paint(object sender, PaintEventArgs e)
         {
             int x = (panel_RegisterContainer.Width - linkLabel_Register.Width) / 2;
@@ -313,6 +200,7 @@ namespace Client.Forms
         {
             if (e.Button == MouseButtons.Left)
             {
+                if (fadeEffect.IsFading()) return;
                 _isDraging = true;
                 _dragStartPoint = e.Location;
             }
@@ -332,59 +220,49 @@ namespace Client.Forms
             if (e.Button == MouseButtons.Left)
             {
                 _isDraging = false;
-                EnsureWindowPositionWithinScreenBounds();
+
+                Screen currentScreen = Screen.FromControl(this);
+                Rectangle screenBounds = currentScreen.WorkingArea;
+                Rectangle formBounds = new Rectangle(this.Location, this.Size);
+
+                bool isOutOfBounds = !screenBounds.Contains(formBounds);
+
+                if (isOutOfBounds)
+                {
+                    formBounds.X = Math.Max(screenBounds.Left, Math.Min(formBounds.X, screenBounds.Right - formBounds.Width));
+                    formBounds.Y = Math.Max(screenBounds.Top, Math.Min(formBounds.Y, screenBounds.Bottom - formBounds.Height));
+
+                    this.Location = formBounds.Location;
+                    this.Invalidate();
+
+                    flashBorder.SetOption(150, 3, Color.IndianRed).Flush(this);
+                }
             }
         }
 
-        private void trayButton_Click(object sender, EventArgs e)
+        private async void trayButton_Click(object sender, EventArgs e)
         {
-            if (!_isFading)
-            {
-                Action tryAction = new Action(() =>
-                {
-                    this.WindowState = FormWindowState.Minimized;
-                });
-                InitializeFadeOut(tryAction);
-                return;
-            }
+            if (fadeEffect.IsFading()) return;
+
+            await fadeEffect.FormFadeOutAsync(this);
+            this.WindowState = FormWindowState.Minimized;
+            this.Opacity = 1;
         }
 
         private void closeButton_Click(object sender, EventArgs e)
         {
-            if (_fadeTimer.Enabled)
-                return;
+            if (fadeEffect.IsFading())
+            {
+                fadeEffect.Abort();
+            }
 
-            string exitConfirmationMessage = string.Format(SystemLanguage.ExitConfirmation_Message, this.Text);
-            DialogResult exitConfirmResult = MessageBox.Show(exitConfirmationMessage, SystemLanguage.Caption_System, MessageBoxButtons.YesNo);
-            if (exitConfirmResult == DialogResult.No)
-            {
-                return;
-            }
-            else
-            {
-                Action exitAction = new Action(() =>
-                {
-                    Application.Exit();
-                });
-                InitializeFadeOut(exitAction);
-            }
+            Application.Exit();            
         }
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
-            // Fade In 처리를 위한 사전 설정
-            this.Opacity = 0;
-            this.WindowState = FormWindowState.Minimized;
-
+            fadeEffect.FormFadeIn(this);
             ActiveControl = panel_Blank2;
-        }
-
-        private void LoginForm_Activated(object sender, EventArgs e)
-        {
-            if (!_isFading && this.Opacity == 0 && this.WindowState == FormWindowState.Minimized)
-            {
-                InitializeFadeIn();
-            }
         }
         #endregion
 
@@ -402,14 +280,13 @@ namespace Client.Forms
         }
         #endregion
 
-        private void linkLabel_Register_Click(object sender, EventArgs e)
+        private void LoginForm_Activated(object sender, EventArgs e)
         {
-            Action hideAction = new Action(() => {
-                this.Hide();
-            });
-            InitializeFadeOut(hideAction);
-
-            // 회원 가입 폼 호출
+            if (WindowState == FormWindowState.Minimized && this.Opacity == 1)
+            {
+                this.Opacity = 0;
+                fadeEffect.FormFadeIn(this);
+            }
         }
     }
 }

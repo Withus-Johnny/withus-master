@@ -229,6 +229,7 @@
             // linkLabel_LoginProblem
             // 
             this.linkLabel_LoginProblem.AutoSize = true;
+            this.linkLabel_LoginProblem.Cursor = System.Windows.Forms.Cursors.Hand;
             this.linkLabel_LoginProblem.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Bold);
             this.linkLabel_LoginProblem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(142)))), ((int)(((byte)(255)))));
             this.linkLabel_LoginProblem.Location = new System.Drawing.Point(88, 6);
@@ -249,6 +250,7 @@
             // linkLabel_Register
             // 
             this.linkLabel_Register.AutoSize = true;
+            this.linkLabel_Register.Cursor = System.Windows.Forms.Cursors.Hand;
             this.linkLabel_Register.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Bold);
             this.linkLabel_Register.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(142)))), ((int)(((byte)(255)))));
             this.linkLabel_Register.Location = new System.Drawing.Point(97, 6);
@@ -317,6 +319,7 @@
             this.Padding = new System.Windows.Forms.Padding(5);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "-";
+            this.Activated += new System.EventHandler(this.LoginForm_Activated);
             this.Load += new System.EventHandler(this.LoginForm_Load);
             this.panel_Container.ResumeLayout(false);
             this.panel_ClientArea.ResumeLayout(false);

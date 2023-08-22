@@ -45,7 +45,6 @@
   <ItemGroup>
     <Compile Include="Configs\Colors.cs" />
     <Compile Include="Configs\Const.cs" />
-    <Compile Include="Configs\SystemLanguage.cs" />
     <Compile Include="Controls\Buttons\ButtonState.cs" />
     <Compile Include="Controls\Buttons\CaptionControls\ButtonType.cs" />
     <Compile Include="Controls\Buttons\CaptionControls\CaptionControlButton.cs">
@@ -63,6 +62,11 @@
     <Compile Include="Controls\TextBoxs\DarkTextBox\DarkTextBox.Designer.cs">
       <DependentUpon>DarkTextBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="Effects\EffectState.cs" />
+    <Compile Include="Effects\FadeEffect\FadeEffect.cs" />
+    <Compile Include="Effects\FadeEffect\IFadeEffect.cs" />
+    <Compile Include="Effects\FlashBoarder\FlashBorder.cs" />
+    <Compile Include="Effects\FlashBoarder\IFlashBorder.cs" />
     <Compile Include="Helpers\EmailValidator.cs" />
     <Compile Include="Helpers\PasswordHasher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
