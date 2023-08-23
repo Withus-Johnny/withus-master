@@ -50,5 +50,35 @@
         /// 크기 조정 가능한 창의 오른쪽 아래 가로 테두리에 있습니다. 사용자가 마우스를 클릭하여 창의 크기를 가로로 조정할 수 있습니다.
         /// </summary>
         public const int HTBOTTOMRIGHT = 17;
+
+        /// <summary>
+        /// 세로 스크롤 막대입니다.
+        /// </summary>
+        public const int SB_VERT = 1;
+
+        /// <summary>
+        /// The nMin and nMax members contain the minimum and maximum values for the scrolling range.
+        /// </summary>
+        public const int SIF_RANGE = 0x1;
+
+        /// <summary>
+        /// The nPage member contains the page size for a proportional scroll bar.
+        /// </summary>
+        public const int SIF_PAGE = 0x2;
+
+        /// <summary>
+        /// The nPos member contains the scroll box position, which is not updated while the user drags the scroll box
+        /// </summary>
+        public const int SIF_POS = 0x4;
+
+        /// <summary>
+        /// The nTrackPos member contains the current position of the scroll box while the user is dragging it.
+        /// </summary>
+        public const int SIF_TRACKPOS = 0x10;
+
+        /// <summary>
+        /// Combination of SIF_PAGE, SIF_POS, SIF_RANGE, and SIF_TRACKPOS.
+        /// </summary>
+        public const int SIF_ALL = SIF_RANGE | SIF_PAGE | SIF_POS | SIF_TRACKPOS;
     }
 }

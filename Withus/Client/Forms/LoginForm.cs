@@ -80,6 +80,8 @@ namespace Client.Forms
 
             fadeEffect = new FadeEffect();
             flashBorder = new FlashBorder();
+
+            this.TopMost = true;
         }
 
         #region Control Events
