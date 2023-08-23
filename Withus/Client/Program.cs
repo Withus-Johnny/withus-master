@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WithusUI.Forms;
 
 namespace Client
 {
     internal static class Program
     {
         public static LoginForm loginForm;
+        public static AgreementForm agreementForm;
         public static RegisterForm registerForm;
 
         /// <summary>
@@ -21,6 +23,7 @@ namespace Client
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(loginForm = new LoginForm());
+            //Application.Run(agreementForm = new AgreementForm());
         }
     }
 }

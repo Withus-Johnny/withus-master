@@ -142,7 +142,7 @@ namespace Client.Forms
             this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.ResizeRedraw, true);
             this.UpdateStyles();
-
+            
             panel_Container.MouseDown += Panel_DragMouseDown;
             panel_Container.MouseMove += Panel_DragMouseMove;
             panel_Container.MouseUp += Panel_DragMouseUp;

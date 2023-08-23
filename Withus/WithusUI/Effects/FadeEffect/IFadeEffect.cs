@@ -15,5 +15,6 @@ namespace WithusUI.Effects.FadeEffect
         Task FormFadeOutAsync(Form control);
 
         void Abort();
+        void Dispose();
     }
 }

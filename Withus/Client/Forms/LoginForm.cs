@@ -84,21 +84,10 @@ namespace Client.Forms
 
         #region Control Events
 
-        private async void linkLabel_Register_Click(object sender, EventArgs e)
+        private void linkLabel_Register_Click(object sender, EventArgs e)
         {
-            if (Program.registerForm != null)
-            {
-                Program.registerForm.Dispose();
-                Program.registerForm = null;
-            }
-
-            Program.registerForm = new RegisterForm();
-            Program.registerForm.Disposed += (o1, e1) =>
-            {
-                Program.registerForm = null;
-                Console.WriteLine("회원가입 폼 닫힘");                
-            };
-            Program.registerForm.ShowDialog();
+            Program.agreementForm = new AgreementForm();
+            Program.agreementForm.ShowDialog();
         }
 
         private void LinkLabel_LoginProblem_Paint(object sender, PaintEventArgs e)
