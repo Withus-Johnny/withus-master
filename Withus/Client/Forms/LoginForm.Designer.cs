@@ -101,7 +101,7 @@
             this.darkTextBox_Email.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(17)))), ((int)(((byte)(23)))));
             this.darkTextBox_Email.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(107)))), ((int)(((byte)(111)))));
             this.darkTextBox_Email.BorderFocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(142)))), ((int)(((byte)(255)))));
-            this.darkTextBox_Email.BorderRadius = 5;
+            this.darkTextBox_Email.BorderRadius = 6;
             this.darkTextBox_Email.BorderSize = 1;
             this.darkTextBox_Email.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.darkTextBox_Email.Font = new System.Drawing.Font("맑은 고딕", 11F);
@@ -154,7 +154,7 @@
             this.darkTextBox_Password.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(17)))), ((int)(((byte)(23)))));
             this.darkTextBox_Password.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(107)))), ((int)(((byte)(111)))));
             this.darkTextBox_Password.BorderFocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(142)))), ((int)(((byte)(255)))));
-            this.darkTextBox_Password.BorderRadius = 5;
+            this.darkTextBox_Password.BorderRadius = 6;
             this.darkTextBox_Password.BorderSize = 1;
             this.darkTextBox_Password.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.darkTextBox_Password.Font = new System.Drawing.Font("맑은 고딕", 11F);
@@ -184,7 +184,7 @@
             this.primeButton_Login.ActiveBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(90)))), ((int)(((byte)(173)))));
             this.primeButton_Login.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(116)))), ((int)(((byte)(224)))));
             this.primeButton_Login.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(116)))), ((int)(((byte)(224)))));
-            this.primeButton_Login.BorderRadius = 5;
+            this.primeButton_Login.BorderRadius = 6;
             this.primeButton_Login.BorderSize = 2;
             this.primeButton_Login.Cursor = System.Windows.Forms.Cursors.Hand;
             this.primeButton_Login.DefaultBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(116)))), ((int)(((byte)(224)))));

@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace WithusUI.Effects.FadeEffect
 {
-    public class FadeEffect : IFadeEffect
+    public class FadeEffect : IFadeEffect, IDisposable
     {
         private Form _targetForm;
 
@@ -111,6 +111,12 @@ namespace WithusUI.Effects.FadeEffect
             {
                 _targetForm.Opacity -= FADE_OPACITY_VALUE;
             }
+        }
+
+        public void Dispose()
+        {
+            Abort();
+            _fadeTimer.Dispose();
         }
     }
 }

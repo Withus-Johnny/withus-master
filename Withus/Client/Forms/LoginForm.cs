@@ -80,15 +80,16 @@ namespace Client.Forms
 
             fadeEffect = new FadeEffect();
             flashBorder = new FlashBorder();
+
+            this.TopMost = true;
         }
 
         #region Control Events
 
-        private async void linkLabel_Register_Click(object sender, EventArgs e)
+        private void linkLabel_Register_Click(object sender, EventArgs e)
         {
-            await fadeEffect.FormFadeOutAsync(this);            
-            this.Close();
-            // 회원 가입 폼 호출
+            Program.agreementForm = new AgreementForm();
+            Program.agreementForm.ShowDialog();
         }
 
         private void LinkLabel_LoginProblem_Paint(object sender, PaintEventArgs e)
@@ -256,7 +257,7 @@ namespace Client.Forms
                 fadeEffect.Abort();
             }
 
-            Application.Exit();            
+            Application.Exit();
         }
 
         private void LoginForm_Load(object sender, EventArgs e)
