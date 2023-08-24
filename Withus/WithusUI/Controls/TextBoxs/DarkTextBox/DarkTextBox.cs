@@ -187,6 +187,7 @@ namespace WithusUI.Controls.TextBoxs.DarkTextBox
             {
                 placeholderText = value;
                 textBox1.Text = "";
+                SendMessage(textBox1.Handle, EM_SETCUEBANNER, 0, placeholderText);
             }
         }
 
