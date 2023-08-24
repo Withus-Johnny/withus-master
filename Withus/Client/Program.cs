@@ -7,7 +7,6 @@ namespace Client
     internal static class Program
     {
         public static LoginForm loginForm;
-        public static AgreementForm agreementForm;
 
         /// <summary>
         /// 해당 애플리케이션의 주 진입점입니다.

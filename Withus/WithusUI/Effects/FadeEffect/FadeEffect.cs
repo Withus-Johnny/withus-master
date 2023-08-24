@@ -13,7 +13,6 @@ namespace WithusUI.Effects.FadeEffect
 
         private Timer _fadeTimer = new Timer();
         private bool _isFading = false;
-        private EffectState EffectState { get; set; }
 
         public void Abort()
         {
@@ -31,8 +30,6 @@ namespace WithusUI.Effects.FadeEffect
         {
             if (_isFading) return;
 
-            EffectState = EffectState.Active;
-
             _targetForm = form;
             _targetForm.Opacity = 0;
 
@@ -43,11 +40,32 @@ namespace WithusUI.Effects.FadeEffect
             _fadeTimer.Start();
         }
 
-        public void FormFadeOut(Form form)
+        public async Task FormFadeInAsync(Form form)
         {
             if (_isFading) return;
 
-            EffectState = EffectState.Active;
+            _targetForm = form;
+            _targetForm.Opacity = 0.1;
+
+            _isFading = true;
+
+            _fadeTimer.Interval = FADE_TICK_VALUE;
+            _fadeTimer.Tick += FadeInTimer_Tick;
+            _fadeTimer.Start();
+
+            await Task.Run(() =>
+            {
+                while (_isFading)
+                {
+                    Task.Delay(FADE_TICK_VALUE);
+                }
+            });
+            return;
+        }
+
+        public void FormFadeOut(Form form)
+        {
+            if (_isFading) return;
 
             _targetForm = form;
 
@@ -62,7 +80,6 @@ namespace WithusUI.Effects.FadeEffect
         {
             if (_isFading) return;
 
-            EffectState = EffectState.Active;
             _targetForm = form;
             _isFading = true;
 
@@ -84,7 +101,6 @@ namespace WithusUI.Effects.FadeEffect
         {
             if (_targetForm.Opacity == 1)
             {
-                EffectState = EffectState.Completed;
                 _fadeTimer.Tick -= FadeInTimer_Tick;
                 _isFading = false;
                 _targetForm = null;
@@ -92,7 +108,6 @@ namespace WithusUI.Effects.FadeEffect
             }
             else
             {
-                EffectState = EffectState.InProgress;
                 _targetForm.Opacity += FADE_OPACITY_VALUE;
             }
         }
@@ -101,7 +116,6 @@ namespace WithusUI.Effects.FadeEffect
         {
             if (_targetForm.Opacity <= 0)
             {
-                EffectState = EffectState.Completed;
                 _fadeTimer.Tick -= FadeOutTimer_Tick;
                 _isFading = false;
                 _targetForm = null;

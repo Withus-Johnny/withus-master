@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AgreementForm));
             this.button_Return = new System.Windows.Forms.Button();
             this.panel_Container = new System.Windows.Forms.Panel();
             this.checkBox_Agreement = new System.Windows.Forms.CheckBox();
@@ -98,12 +97,12 @@
             this.richTextBox1.ShowSelectionMargin = true;
             this.richTextBox1.Size = new System.Drawing.Size(554, 350);
             this.richTextBox1.TabIndex = 4;
-            this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
+            this.richTextBox1.Text = "";
             // 
             // InterfaceTimer
             // 
             this.InterfaceTimer.Enabled = true;
-            this.InterfaceTimer.Interval = 25;
+            this.InterfaceTimer.Interval = 10;
             this.InterfaceTimer.Tick += new System.EventHandler(this.InterfaceTimer_Tick);
             // 
             // panel_Controls

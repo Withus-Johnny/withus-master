@@ -232,7 +232,7 @@
             this.linkLabel_LoginProblem.Cursor = System.Windows.Forms.Cursors.Hand;
             this.linkLabel_LoginProblem.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Bold);
             this.linkLabel_LoginProblem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(142)))), ((int)(((byte)(255)))));
-            this.linkLabel_LoginProblem.Location = new System.Drawing.Point(88, 6);
+            this.linkLabel_LoginProblem.Location = new System.Drawing.Point(23, 3);
             this.linkLabel_LoginProblem.Name = "linkLabel_LoginProblem";
             this.linkLabel_LoginProblem.Size = new System.Drawing.Size(134, 21);
             this.linkLabel_LoginProblem.TabIndex = 0;
@@ -253,7 +253,7 @@
             this.linkLabel_Register.Cursor = System.Windows.Forms.Cursors.Hand;
             this.linkLabel_Register.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Bold);
             this.linkLabel_Register.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(142)))), ((int)(((byte)(255)))));
-            this.linkLabel_Register.Location = new System.Drawing.Point(97, 6);
+            this.linkLabel_Register.Location = new System.Drawing.Point(23, 11);
             this.linkLabel_Register.Name = "linkLabel_Register";
             this.linkLabel_Register.Size = new System.Drawing.Size(118, 21);
             this.linkLabel_Register.TabIndex = 0;
@@ -307,20 +307,18 @@
             // 
             // LoginForm
             // 
+            this.AllowResize = false;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BorderSize = 1;
             this.ClientSize = new System.Drawing.Size(348, 757);
             this.ControlBox = false;
             this.Controls.Add(this.panel_Container);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FlashRepeatCount = 2;
             this.MaximizeBox = false;
             this.Name = "LoginForm";
-            this.Padding = new System.Windows.Forms.Padding(5);
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "-";
             this.Activated += new System.EventHandler(this.LoginForm_Activated);
-            this.Load += new System.EventHandler(this.LoginForm_Load);
             this.panel_Container.ResumeLayout(false);
             this.panel_ClientArea.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Brand)).EndInit();

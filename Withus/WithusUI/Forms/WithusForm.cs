@@ -20,7 +20,7 @@ namespace WithusUI.Forms
 
         private bool _isDragging = false;
         private Point _dragStartPoint;
-        
+
         private IFlashBorder _flashBorder;
         private IFadeEffect _fadeEffect;
 
@@ -28,6 +28,8 @@ namespace WithusUI.Forms
         private int _flashDuration = 150;
         private int _flashRepeatCount = 3;
         private Color _flashBorderColor = Color.IndianRed;
+
+        public bool IsLoaded { get; private set; }
 
         #region 보더 스트럭쳐
         public new Rectangle Top()
@@ -182,35 +184,39 @@ namespace WithusUI.Forms
             this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.ResizeRedraw, true);
             this.UpdateStyles();
-                        
+
             _flashBorder = new FlashBorder();
             _fadeEffect = new FadeEffect();
             this.Load += WithusForm_Load;
         }
 
-        private void WithusForm_Load(object sender, EventArgs e)
+        private async void WithusForm_Load(object sender, EventArgs e)
         {
-            _fadeEffect.FormFadeIn(this);            
+            this.Visible = false;
+            await _fadeEffect.FormFadeInAsync(this);
+            IsLoaded = true;
+            this.Visible = true;
         }
 
         public void SubscribeToDragEventsForPanels(Control container)
         {
             foreach (Control control in container.Controls)
             {
-                if (control is Panel panel)
+                if (control.GetType() == typeof(Panel) || control.GetType() == typeof(PictureBox))
                 {
-                    if (panel.Tag == null || !panel.Tag.Equals("Subscribed"))
+                    if (control.Tag == null || control.Tag.Equals("Subscribed"))
                     {
-                        panel.MouseDown += Panel_MouseDown;
-                        panel.MouseMove += Panel_MouseMove;
-                        panel.MouseUp += Panel_MouseUp;
+                        control.MouseDown += Panel_MouseDown;
+                        control.MouseMove += Panel_MouseMove;
+                        control.MouseUp += Panel_MouseUp;
 
-                        panel.Tag = "Subscribed";
+                        control.Tag = "Subscribed";
+
+                        if (control.HasChildren)
+                        {
+                            SubscribeToDragEventsForPanels(control);
+                        }
                     }
-                }
-                if (control.HasChildren)
-                {
-                    SubscribeToDragEventsForPanels(control);
                 }
             }
         }
@@ -219,21 +225,24 @@ namespace WithusUI.Forms
         {
             foreach (Control control in container.Controls)
             {
-                if (control is Panel panel)
+                if (control.Tag != null)
                 {
-                    panel.MouseDown -= Panel_MouseDown;
-                    panel.MouseMove -= Panel_MouseMove;
-                    panel.MouseUp -= Panel_MouseUp;
+                    if (control.Tag.Equals("Subscribed"))
+                    {
+                        control.MouseDown -= Panel_MouseDown;
+                        control.MouseMove -= Panel_MouseMove;
+                        control.MouseUp -= Panel_MouseUp;
 
-                    panel.Tag = null;
-                }
-                if (control.HasChildren)
-                {
-                    UnsubscribeFromDragEventsForPanels(control);
+                        control.Tag = null;
+
+                        if (control.HasChildren)
+                        {
+                            UnsubscribeFromDragEventsForPanels(control);
+                        }
+                    }
                 }
             }
         }
-
 
         private void Panel_MouseDown(object sender, MouseEventArgs e)
         {
@@ -276,15 +285,14 @@ namespace WithusUI.Forms
             }
         }
 
-
-
-
-
         #region 윈도우 메세지 프로시저       
 
         protected override void WndProc(ref Message m)
         {
             base.WndProc(ref m);
+
+            if (!AllowResize) return;
+
             if (m.Msg == WM.WM_NCHITTEST)
             {
                 var mousePoint = this.PointToClient(Cursor.Position);
@@ -314,7 +322,6 @@ namespace WithusUI.Forms
         {
             if (!_allowResize)
             {
-                Console.WriteLine("리사이징 비활성화 상태");
                 _borderSize = 1;
             }
 

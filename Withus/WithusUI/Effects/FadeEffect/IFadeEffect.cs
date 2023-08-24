@@ -11,6 +11,7 @@ namespace WithusUI.Effects.FadeEffect
     {
         bool IsFading();
         void FormFadeIn(Form control);
+        Task FormFadeInAsync(Form control);
         void FormFadeOut(Form control);
         Task FormFadeOutAsync(Form control);
 

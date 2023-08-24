@@ -10,15 +10,28 @@ namespace Client.Forms
 {
     public partial class AgreementForm : WithusForm
     {
-        private bool _isClosingState = false;
         IFadeEffect _fadeEffect;
 
         public AgreementForm()
         {
             InitializeComponent();
+            this.ShowInTaskbar = false;
+            this.StartPosition = FormStartPosition.CenterParent;
+
             SubscribeToDragEventsForPanels(this);
+
             _fadeEffect = new FadeEffect();
-            this.TopMost = true;
+        }
+
+        private void AgreementForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            _fadeEffect.Dispose();
+            _fadeEffect = null;
+            UnsubscribeFromDragEventsForPanels(this);
+
+            richTextBox1.Visible = false;
+            richTextBox1.Clear();
+            richTextBox1.Dispose();
         }
 
         private void AgreementForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -32,22 +45,11 @@ namespace Client.Forms
 
         private async void button_Return_Click(object sender, EventArgs e)
         {
-
-            if (!_isClosingState)
+            if (IsLoaded)
             {
-                _isClosingState = true;
                 await _fadeEffect.FormFadeOutAsync(this);
                 this.Close();
             }
-        }
-
-        private void AgreementForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            _fadeEffect.Dispose();
-            _fadeEffect = null;
-            UnsubscribeFromDragEventsForPanels(this);
-            Program.agreementForm = null;
-            this.Dispose();
         }
 
         private void InterfaceTimer_Tick(object sender, EventArgs e)
@@ -61,7 +63,6 @@ namespace Client.Forms
             Native.GetScrollInfo(richTextBox1.Handle, WM.SB_VERT, ref scrollInfo);
 
             bool isAtBottom = scrollInfo.nPos + scrollInfo.nPage >= scrollInfo.nMax;
-
 
             if (isAtBottom)
             {
@@ -90,5 +91,7 @@ namespace Client.Forms
                 primeButton_Next.Enabled = false;
             }
         }
+
+
     }
 }
