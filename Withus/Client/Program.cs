@@ -16,8 +16,7 @@ namespace Client
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(loginForm = new LoginForm());
-            //Application.Run(agreementForm = new AgreementForm());
+            Application.Run(loginForm = new LoginForm());            
         }
     }
 }

@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using WithusUI.Configs;
 using WithusUI.Effects.FadeEffect;
-using WithusUI.Effects.FlashBoarder;
 using WithusUI.Forms;
 using WithusUI.Helpers;
 
@@ -15,7 +14,10 @@ namespace Client.Forms
         private bool _isEmailValid = false;
         private bool _isPasswordValid = false;
 
-        IFadeEffect fadeEffect;
+        IFadeEffect _fadeEffect;
+
+        public AgreementForm _agreementForm;
+        public RegisterForm _registerForm;
 
         public LoginForm()
         {
@@ -29,21 +31,43 @@ namespace Client.Forms
             linkLabel_Register.Paint += LinkLabel_Register_Paint;
             linkLabel_LoginProblem.Paint += LinkLabel_LoginProblem_Paint;
 
-            fadeEffect = new FadeEffect();
+            _fadeEffect = new FadeEffect();
         }
 
+        public void InitializeAgreementForm()
+        {
+            _agreementForm = new AgreementForm();
+            _agreementForm.FormClosed += _agreementForm_FormClosed;
+            _agreementForm.ShowDialog(this);
+        }
+
+        public void InitializeRegisterForm()
+        {
+            _registerForm = new RegisterForm();
+            _registerForm.FormClosed += _registerForm_FormClosed;
+            _registerForm.ShowDialog(this);
+        }
+
+
         #region Control Events
+        private void _registerForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            _registerForm.FormClosed -= _registerForm_FormClosed;
+            _registerForm = null;
+        }
 
         private void linkLabel_Register_Click(object sender, EventArgs e)
         {
-            using (AgreementForm agreement = new AgreementForm())
+            if (_agreementForm == null)
             {
-                agreement.Disposed += (o1, e1) =>
-                {
-                    GC.Collect();
-                };
-                agreement.ShowDialog();
+                InitializeAgreementForm();
             }
+        }
+
+        private void _agreementForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            _agreementForm.FormClosed -= _agreementForm_FormClosed;
+            _agreementForm = null;
         }
 
         private void LinkLabel_LoginProblem_Paint(object sender, PaintEventArgs e)
@@ -153,18 +177,18 @@ namespace Client.Forms
 
         private async void trayButton_Click(object sender, EventArgs e)
         {
-            if (fadeEffect.IsFading()) return;
+            if (_fadeEffect.IsFading()) return;
 
-            await fadeEffect.FormFadeOutAsync(this);
+            await _fadeEffect.FormFadeOutAsync(this);
             this.WindowState = FormWindowState.Minimized;
             this.Opacity = 1;
         }
 
         private void closeButton_Click(object sender, EventArgs e)
         {
-            if (fadeEffect.IsFading())
+            if (_fadeEffect.IsFading())
             {
-                fadeEffect.Abort();
+                _fadeEffect.Abort();
             }
 
             Application.Exit();
@@ -176,7 +200,7 @@ namespace Client.Forms
             if (WindowState == FormWindowState.Minimized && this.Opacity == 1)
             {
                 this.Opacity = 0;
-                fadeEffect.FormFadeIn(this);
+                _fadeEffect.FormFadeIn(this);
             }
         }
     }
