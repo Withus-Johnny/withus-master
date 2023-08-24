@@ -139,6 +139,7 @@
             this.primeButton_Next.Text = "다음";
             this.primeButton_Next.TextColor = System.Drawing.Color.WhiteSmoke;
             this.primeButton_Next.UseVisualStyleBackColor = false;
+            this.primeButton_Next.Click += new System.EventHandler(this.primeButton_Next_Click);
             // 
             // AgreementForm
             // 

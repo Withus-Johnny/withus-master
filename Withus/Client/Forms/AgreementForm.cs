@@ -27,11 +27,11 @@ namespace Client.Forms
         {
             _fadeEffect.Dispose();
             _fadeEffect = null;
-            UnsubscribeFromDragEventsForPanels(this);
-
+            UnsubscribeFromDragEventsForPanels(this);            
             richTextBox1.Visible = false;
             richTextBox1.Clear();
             richTextBox1.Dispose();
+            this.Dispose();
         }
 
         private void AgreementForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -91,7 +91,14 @@ namespace Client.Forms
                 primeButton_Next.Enabled = false;
             }
         }
+        private async void primeButton_Next_Click(object sender, EventArgs e)
+        {
+            await _fadeEffect.FormFadeOutAsync(this);
+            this.Close();
 
-
+            Program.loginForm.BeginInvoke(new Action(() => {
+                Program.loginForm.InitializeRegisterForm();
+            }));
+        }
     }
 }
