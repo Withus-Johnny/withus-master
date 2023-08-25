@@ -137,6 +137,7 @@
             this.darkTextBox_Recommender.TabIndex = 5;
             this.darkTextBox_Recommender.Texts = "";
             this.darkTextBox_Recommender.UnderlinedStyle = false;
+            this.darkTextBox_Recommender.TextChangedEvent += new System.EventHandler(this.darkTextBox_Recommender_TextChangedEvent);
             this.darkTextBox_Recommender.Enter += new System.EventHandler(this.darkTextBox_Recommender_Enter);
             // 
             // panel_Phone
@@ -337,6 +338,7 @@
             this.darkTextBox_EmailConfirmCode.Texts = "";
             this.darkTextBox_EmailConfirmCode.UnderlinedStyle = false;
             this.darkTextBox_EmailConfirmCode.TextChangedEvent += new System.EventHandler(this.darkTextBox_EmailConfirmCode_TextChangedEvent);
+            this.darkTextBox_EmailConfirmCode.KeyDownEvent += new System.Windows.Forms.KeyEventHandler(this.darkTextBox_EmailConfirmCode_KeyDownEvent);
             this.darkTextBox_EmailConfirmCode.Enter += new System.EventHandler(this.darkTextBox_EmailConfirmCode_Enter);
             // 
             // panel_InputEmail

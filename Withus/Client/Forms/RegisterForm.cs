@@ -23,6 +23,7 @@ namespace Client.Forms
         private bool _isPasswordValid = false;
         private bool _isUserNameValid = false;
         private bool _isPhoneValid = false;
+        private bool _isRecommenderValid = false;
 
         public RegisterForm()
         {
@@ -35,6 +36,7 @@ namespace Client.Forms
             linkLabel1_Descript.Text = "양식에 맞춰 입력을 해주세요.";
         }
 
+        #region Control Events
         private void RegisterForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if ((ModifierKeys & Keys.Alt) != 0 && e.CloseReason == CloseReason.UserClosing)
@@ -64,6 +66,36 @@ namespace Client.Forms
             }
         }
 
+        private void InterfaceTimer_Tick(object sender, EventArgs e)
+        {
+            if (_isSent)
+            {
+                if (_isEmailCertified)
+                {
+                    InterfaceTimer.Stop();
+                    _stopwatch.Reset();
+                    _stopwatch.Stop();
+                    return;
+                }
+
+                if (_stopwatch.Elapsed.Seconds == Email_Confirm_Delay)
+                {
+                    primeButton_EmailConfirm.Text = "재전송 하기";
+                    InterfaceTimer.Stop();
+                    _stopwatch.Reset();
+                    _stopwatch.Stop();
+                    darkTextBox_Email.Enabled = true;
+                    primeButton_EmailConfirm.Enabled = true;
+                    darkTextBox_EmailConfirmCode.Texts = "";
+                }
+                else
+                {
+                    primeButton_EmailConfirm.Text = $"{Email_Confirm_Delay - _stopwatch.Elapsed.Seconds}";
+                }
+            }
+        }
+        #endregion
+
         private void darkTextBox_Email_TextChangedEvent(object sender, EventArgs e)
         {
             if (EmailValidator.IsValidEmail(darkTextBox_Email.Texts))
@@ -90,6 +122,21 @@ namespace Client.Forms
                 }
             }
         }
+
+        private void darkTextBox_EmailConfirmCode_Enter(object sender, EventArgs e)
+        {
+            if (_masterCode == default(int))
+            {
+                linkLabel1_Descript.Text = "이메일 인증을 진행해 주세요.";
+                primeButton_EmailConfirm.Focus();
+            }
+            else
+            {
+                linkLabel1_Descript.Text = "해당 이메일로 발송된 인증 코드를 입력해 주세요.";
+            }
+        }
+
+
 
         private void primeButton_Submit_Click(object sender, EventArgs e)
         {
@@ -151,48 +198,6 @@ namespace Client.Forms
 
             linkLabel1_Descript.Text = "인증 코드를 발송했습니다. 확인 후 입력해 주세요.";
             this.ActiveControl = darkTextBox_EmailConfirmCode;
-        }
-
-        private void InterfaceTimer_Tick(object sender, EventArgs e)
-        {
-            if (_isSent)
-            {
-                if (_isEmailCertified)
-                {
-                    InterfaceTimer.Stop();
-                    _stopwatch.Reset();
-                    _stopwatch.Stop();
-                    return;
-                }
-
-                if (_stopwatch.Elapsed.Seconds == Email_Confirm_Delay)
-                {
-                    primeButton_EmailConfirm.Text = "재전송 하기";
-                    InterfaceTimer.Stop();
-                    _stopwatch.Reset();
-                    _stopwatch.Stop();
-                    darkTextBox_Email.Enabled = true;
-                    primeButton_EmailConfirm.Enabled = true;
-                    darkTextBox_EmailConfirmCode.Texts = "";
-                }
-                else
-                {
-                    primeButton_EmailConfirm.Text = $"{Email_Confirm_Delay - _stopwatch.Elapsed.Seconds}";
-                }
-            }
-        }
-
-        private void darkTextBox_EmailConfirmCode_Enter(object sender, EventArgs e)
-        {
-            if (_masterCode == default(int))
-            {
-                linkLabel1_Descript.Text = "이메일 인증을 진행해 주세요.";
-                primeButton_EmailConfirm.Focus();
-            }
-            else
-            {
-                linkLabel1_Descript.Text = "해당 이메일로 발송된 인증 코드를 입력해 주세요.";
-            }
         }
 
         private void darkTextBox_EmailConfirmCode_TextChangedEvent(object sender, EventArgs e)
@@ -297,7 +302,7 @@ namespace Client.Forms
 
         private void darkTextBox_Recommender_Enter(object sender, EventArgs e)
         {
-            linkLabel1_Descript.Text = "추천인을 입력해 주세요.";
+            linkLabel1_Descript.Text = "(선택) 추천인을 입력해 주세요.";
         }
 
         private void darkTextBox_UserName_Leave(object sender, EventArgs e)
@@ -375,6 +380,28 @@ namespace Client.Forms
             else
             {
                 _isUserNameValid = false;
+            }
+        }
+
+        private void darkTextBox_EmailConfirmCode_KeyDownEvent(object sender, KeyEventArgs e)
+        {
+            bool isDigitKey = (e.KeyCode >= Keys.D0 && e.KeyCode <= Keys.D9) ||
+                              (e.KeyCode >= Keys.NumPad0 && e.KeyCode <= Keys.NumPad9);
+            if (!isDigitKey)
+            {
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        private void darkTextBox_Recommender_TextChangedEvent(object sender, EventArgs e)
+        {
+            if (darkTextBox_Recommender.Texts.Length >= 2)
+            {
+                _isRecommenderValid = true;
+            }
+            else
+            {
+                _isRecommenderValid = false;
             }
         }
     }
