@@ -36,6 +36,7 @@ namespace Client.Forms
 
         public void InitializeAgreementForm()
         {
+            if (_agreementForm != null) return;
             _agreementForm = new AgreementForm();
             _agreementForm.FormClosed += _agreementForm_FormClosed;
             _agreementForm.ShowDialog(this);
@@ -43,6 +44,7 @@ namespace Client.Forms
 
         public void InitializeRegisterForm()
         {
+            if (_registerForm != null) return;
             _registerForm = new RegisterForm();
             _registerForm.FormClosed += _registerForm_FormClosed;
             _registerForm.ShowDialog(this);
@@ -52,6 +54,7 @@ namespace Client.Forms
         #region Control Events
         private void _registerForm_FormClosed(object sender, FormClosedEventArgs e)
         {
+            if (_registerForm == null) return;
             _registerForm.FormClosed -= _registerForm_FormClosed;
             _registerForm = null;
         }

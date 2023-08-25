@@ -9,7 +9,7 @@ namespace WithusUI.Helpers
 {
     public static class EmailValidator
     {
-        private static string[] _allowedDomains = { "naver.com", "daum.net",
+        public static string[] _allowedDomains = { "naver.com", "daum.net",
             "gmail.com", "yahoo.com", "hanmail.net", "nate.com" };
 
         private static string GetDomainPattern()
