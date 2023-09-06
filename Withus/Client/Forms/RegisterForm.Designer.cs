@@ -31,8 +31,6 @@
             this.button_Return = new System.Windows.Forms.Button();
             this.panel_Container = new System.Windows.Forms.Panel();
             this.panel_InputArea = new System.Windows.Forms.Panel();
-            this.panel_Recommender = new System.Windows.Forms.Panel();
-            this.darkTextBox_Recommender = new WithusUI.Controls.TextBoxs.DarkTextBox.DarkTextBox();
             this.panel_Phone = new System.Windows.Forms.Panel();
             this.darkTextBox_Phone = new WithusUI.Controls.TextBoxs.DarkTextBox.DarkTextBox();
             this.panel_UserName = new System.Windows.Forms.Panel();
@@ -48,7 +46,6 @@
             this.primeButton_Submit = new WithusUI.Controls.Buttons.PrimeButton.PrimeButton();
             this.panel_Container.SuspendLayout();
             this.panel_InputArea.SuspendLayout();
-            this.panel_Recommender.SuspendLayout();
             this.panel_Phone.SuspendLayout();
             this.panel_UserName.SuspendLayout();
             this.panel_ConfirmPassword.SuspendLayout();
@@ -86,7 +83,6 @@
             // 
             // panel_InputArea
             // 
-            this.panel_InputArea.Controls.Add(this.panel_Recommender);
             this.panel_InputArea.Controls.Add(this.panel_Phone);
             this.panel_InputArea.Controls.Add(this.panel_UserName);
             this.panel_InputArea.Controls.Add(this.panel_ConfirmPassword);
@@ -98,40 +94,6 @@
             this.panel_InputArea.Padding = new System.Windows.Forms.Padding(10, 10, 5, 10);
             this.panel_InputArea.Size = new System.Drawing.Size(533, 350);
             this.panel_InputArea.TabIndex = 7;
-            // 
-            // panel_Recommender
-            // 
-            this.panel_Recommender.Controls.Add(this.darkTextBox_Recommender);
-            this.panel_Recommender.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel_Recommender.Location = new System.Drawing.Point(10, 235);
-            this.panel_Recommender.Name = "panel_Recommender";
-            this.panel_Recommender.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-            this.panel_Recommender.Size = new System.Drawing.Size(518, 45);
-            this.panel_Recommender.TabIndex = 6;
-            // 
-            // darkTextBox_Recommender
-            // 
-            this.darkTextBox_Recommender.Alignment = System.Windows.Forms.HorizontalAlignment.Left;
-            this.darkTextBox_Recommender.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(17)))), ((int)(((byte)(23)))));
-            this.darkTextBox_Recommender.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(107)))), ((int)(((byte)(111)))));
-            this.darkTextBox_Recommender.BorderFocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(142)))), ((int)(((byte)(255)))));
-            this.darkTextBox_Recommender.BorderRadius = 4;
-            this.darkTextBox_Recommender.BorderSize = 1;
-            this.darkTextBox_Recommender.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.darkTextBox_Recommender.Font = new System.Drawing.Font("굴림", 12F);
-            this.darkTextBox_Recommender.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(139)))));
-            this.darkTextBox_Recommender.Location = new System.Drawing.Point(7, 5);
-            this.darkTextBox_Recommender.Multiline = false;
-            this.darkTextBox_Recommender.Name = "darkTextBox_Recommender";
-            this.darkTextBox_Recommender.Padding = new System.Windows.Forms.Padding(14, 7, 10, 7);
-            this.darkTextBox_Recommender.PasswordChar = false;
-            this.darkTextBox_Recommender.PlaceholderText = "추천인";
-            this.darkTextBox_Recommender.Size = new System.Drawing.Size(504, 33);
-            this.darkTextBox_Recommender.TabIndex = 5;
-            this.darkTextBox_Recommender.Texts = "";
-            this.darkTextBox_Recommender.UnderlinedStyle = false;
-            this.darkTextBox_Recommender.TextChangedEvent += new System.EventHandler(this.darkTextBox_Recommender_TextChangedEvent);
-            this.darkTextBox_Recommender.Enter += new System.EventHandler(this.darkTextBox_Recommender_Enter);
             // 
             // panel_Phone
             // 
@@ -370,7 +332,6 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.RegisterForm_FormClosed);
             this.panel_Container.ResumeLayout(false);
             this.panel_InputArea.ResumeLayout(false);
-            this.panel_Recommender.ResumeLayout(false);
             this.panel_Phone.ResumeLayout(false);
             this.panel_UserName.ResumeLayout(false);
             this.panel_ConfirmPassword.ResumeLayout(false);
@@ -389,7 +350,6 @@
         private WithusUI.Controls.Buttons.PrimeButton.PrimeButton primeButton_Submit;
         private WithusUI.Controls.TextBoxs.DarkTextBox.DarkTextBox darkTextBox_Password;
         private WithusUI.Controls.TextBoxs.DarkTextBox.DarkTextBox darkTextBox_Email;
-        private WithusUI.Controls.TextBoxs.DarkTextBox.DarkTextBox darkTextBox_Recommender;
         private WithusUI.Controls.TextBoxs.DarkTextBox.DarkTextBox darkTextBox_Phone;
         private WithusUI.Controls.TextBoxs.DarkTextBox.DarkTextBox darkTextBox_UserName;
         private WithusUI.Controls.TextBoxs.DarkTextBox.DarkTextBox darkTextBox_ConfirmPassword;
@@ -399,7 +359,6 @@
         private System.Windows.Forms.Panel panel_ConfirmPassword;
         private System.Windows.Forms.Panel panel_UserName;
         private System.Windows.Forms.Panel panel_Phone;
-        private System.Windows.Forms.Panel panel_Recommender;
         private WithusUI.Controls.Labels.LinkLabel linkLabel1_Descript;
     }
 }

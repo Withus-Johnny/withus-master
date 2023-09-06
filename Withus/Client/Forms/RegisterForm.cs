@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using WithusUI.Configs;
-using WithusUI.Controls.TextBoxs.DarkTextBox;
 using WithusUI.Effects.FadeEffect;
 using WithusUI.Forms;
 using WithusUI.Helpers;
@@ -19,7 +17,6 @@ namespace Client.Forms
         private bool _isPasswordValid = false;
         private bool _isUserNameValid = false;
         private bool _isPhoneValid = false;
-        private bool _isRecommenderValid = false;
 
         public RegisterForm()
         {
@@ -115,7 +112,6 @@ namespace Client.Forms
             darkTextBox_ConfirmPassword.Enabled = false;
             darkTextBox_UserName.Enabled = false;
             darkTextBox_Phone.Enabled = false;
-            darkTextBox_Recommender.Enabled = false;
 
             primeButton_Submit.Enabled = false;
             button_Return.Enabled = false;
@@ -231,7 +227,6 @@ namespace Client.Forms
                         _isPhoneValid = true;
                         linkLabel1_Descript.Text = "휴대폰 번호 입력 완료 상태입니다.";
                         darkTextBox_Phone.Alignment = HorizontalAlignment.Center;
-                        darkTextBox_Recommender.Focus();
                         return;
                     }
                 }
@@ -288,18 +283,6 @@ namespace Client.Forms
             if (!isDigitKey)
             {
                 e.SuppressKeyPress = true;
-            }
-        }
-
-        private void darkTextBox_Recommender_TextChangedEvent(object sender, EventArgs e)
-        {
-            if (darkTextBox_Recommender.Texts.Length >= 2)
-            {
-                _isRecommenderValid = true;
-            }
-            else
-            {
-                _isRecommenderValid = false;
             }
         }
     }
