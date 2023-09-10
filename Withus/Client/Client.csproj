@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\SystemController.cs" />
     <Compile Include="Forms\AgreementForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,6 +71,7 @@
     <Compile Include="Forms\RegisterForm.Designer.cs">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Networks\Network.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\AgreementForm.resx">
@@ -109,6 +111,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Shared\Shared.csproj">
+      <Project>{09e84e69-b017-4ef7-b3f2-ebdeaccdf52f}</Project>
+      <Name>Shared</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WithusUI\WithusUI.csproj">
       <Project>{557d8e59-9bf7-4730-be13-c8f354d1b48a}</Project>
       <Name>WithusUI</Name>

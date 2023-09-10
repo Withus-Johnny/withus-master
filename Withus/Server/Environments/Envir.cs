@@ -73,7 +73,7 @@ namespace Server.Environments
                 var tempConnection = new WithusClient(++_sessionID, tempTcpClient);
                 lock (WithusClientsList)
                 {
-                    Console.WriteLine($"{ipAddress} 연결");
+                    Console.WriteLine($"[ CONNECTED ] SESSION:{tempConnection.SessionID}] [IP:{ipAddress}]");
                     WithusClientsList.Add(tempConnection);
                 }
             }

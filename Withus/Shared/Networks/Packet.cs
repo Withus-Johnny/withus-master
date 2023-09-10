@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using S = ServerPackets;
+using C = ClientPackets;
 
 namespace Shared.Networks
 {
@@ -82,6 +83,12 @@ namespace Shared.Networks
         {
             switch (index)
             {
+                case (short)ClientPacketIds.ClientVersion:
+                    return new C.ClientVersion();
+                case (short)ClientPacketIds.Disconnect:
+                    return new C.Disconnect();
+                case (short)ClientPacketIds.KeepAlive:
+                    return new C.KeepAlive();
                 default:
                     return null;
             }
@@ -93,6 +100,12 @@ namespace Shared.Networks
             {
                 case (short)ServerPacketIds.Connected:
                     return new S.Connected();
+                case (short)ServerPacketIds.ClientVersion:
+                    return new S.ClientVersion();
+                case (short)ServerPacketIds.Disconnect:
+                    return new S.Disconnect();
+                case (short)ServerPacketIds.KeepAlive:
+                    return new S.KeepAlive();
                 default:
                     return null;
             }

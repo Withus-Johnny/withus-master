@@ -3,6 +3,7 @@ using Shared.Networks;
 using System.Collections.Concurrent;
 using System.Net.Sockets;
 using S = ServerPackets;
+using C = ClientPackets;
 
 namespace Server.Connections
 {
@@ -154,7 +155,7 @@ namespace Server.Connections
         {
             if (_client == null || !_client.Connected)
             {
-                Disconnect(20);
+                Disconnect(DisconnectReason.ClientShutDown);
                 return;
             }
 
@@ -177,7 +178,7 @@ namespace Server.Connections
 
             if (Program.Envir.Time > TimeOutTime)
             {
-                Disconnect(30);
+                Disconnect(DisconnectReason.TimeOut);
                 return;
             }
 
@@ -193,6 +194,101 @@ namespace Server.Connections
             }
 
             BeginSend(data);
+        }
+
+        private void BeginSend(List<byte> data)
+        {
+            if (!Connected || data.Count == 0) return;
+
+            //Interlocked.Add(ref Network.Sent, data.Count);
+
+            try
+            {
+                _client.Client.BeginSend(data.ToArray(), 0, data.Count, SocketFlags.None, SendData, Disconnecting);
+            }
+            catch
+            {
+                Disconnecting = true;
+            }
+        }
+
+        private void SendData(IAsyncResult result)
+        {
+            try
+            {
+                if (_client != null)
+                {
+                    _client.Client.EndSend(result);
+                }
+            }
+            catch
+            { }
+        }
+
+        private void ProcessPacket(Packet p)
+        {
+            if (p == null || Disconnecting) return;
+
+            switch (p.Index)
+            {
+                case (short)ClientPacketIds.Disconnect:
+                    Disconnect(DisconnectReason.ClientExit);
+                    break;
+                case (short)ClientPacketIds.KeepAlive:
+                    ClientKeepAlive((C.KeepAlive)p);
+                    break;
+            }
+        }
+
+        private void ClientKeepAlive(C.KeepAlive p)
+        {
+            Console.WriteLine($"[ KEEPALIVE - {LastKeepAliveDateTime} -> {DateTime.Now}] -SESSION:{SessionID} -IP:{IPAddress}");
+            LastKeepAliveDateTime = DateTime.Now;
+            Enqueue(new S.KeepAlive
+            {
+                Time  =p.Time
+            });
+        }
+
+        public void Disconnect(DisconnectReason reasonType)
+        {
+            if (!Connected) return;
+
+            switch (reasonType)
+            {
+                case DisconnectReason.TimeOut:
+                    Console.WriteLine($"[ DISCONNECT - TIMEOUT ] -SESSION:{SessionID} -IP:{IPAddress}");
+                    break;
+                case DisconnectReason.ClientExit:
+                    Console.WriteLine($"[ DISCONNECT - USER CLOSE ] -SESSION:{SessionID} -IP:{IPAddress}");
+                    break;
+                default:
+                    Console.WriteLine("[ DISCONNECT - DEFAULT ]");
+                    break;
+            }
+            Connected = false;
+            TimeDisconnected = Program.Envir.Time;
+
+
+            lock (Program.Envir.WithusClientsList)
+            {
+                Program.Envir.WithusClientsList.Remove(this);
+            }
+
+            _sendList = null;
+            _receiveList = null;
+            _retryList = null;
+            _rawData = null;
+
+            if (_client != null) _client.Client.Dispose();
+            _client = null;
+        }
+
+        public void Enqueue(Packet p)
+        {
+            if (p == null) return;
+            if (_sendList != null && p != null)
+                _sendList.Enqueue(p);
         }
     }
 }

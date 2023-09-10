@@ -1,11 +1,18 @@
-﻿using Client.Forms;
+﻿using Client.Controllers;
+using Client.Forms;
+using Client.Networks;
+using Shared.Networks;
 using System;
+using System.Drawing;
+using System.Runtime.InteropServices;
+using System.Security;
 using System.Windows.Forms;
 
 namespace Client
 {
     internal static class Program
     {
+
         public static LoginForm loginForm;
 
         /// <summary>
@@ -16,7 +23,11 @@ namespace Client
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(loginForm = new LoginForm());            
+
+            Packet.IsServer = false;
+            SystemController.Instance.InitializeNetwork();
+            Application.Run(loginForm = new LoginForm());
+            SystemController.Instance.Stop();
         }
     }
 }
