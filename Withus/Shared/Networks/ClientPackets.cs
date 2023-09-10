@@ -56,4 +56,32 @@ namespace ClientPackets
             writer.Write(Time);
         }
     }
+
+    public sealed class NewAccount : Packet
+    {
+        public override short Index
+        {
+            get { return (short)ClientPacketIds.NewAccount; }
+        }
+
+        public string UserEmail;
+        public string UserPassword;
+        public string UserName;
+        public string UserPhone;
+
+        protected override void ReadPacket(BinaryReader reader)
+        {
+            UserEmail = reader.ReadString();
+            UserPassword = reader.ReadString();
+            UserName = reader.ReadString();
+            UserPhone = reader.ReadString();
+        }
+        protected override void WritePacket(BinaryWriter writer)
+        {
+            writer.Write(UserEmail);
+            writer.Write(UserPassword);
+            writer.Write(UserName);
+            writer.Write(UserPhone);
+        }
+    }
 }

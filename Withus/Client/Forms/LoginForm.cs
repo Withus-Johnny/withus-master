@@ -196,6 +196,7 @@ namespace Client.Forms
             }
 
             SystemController.Instance.Stop();
+            Application.Exit();
         }
         #endregion
 

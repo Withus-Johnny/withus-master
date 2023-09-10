@@ -16,5 +16,6 @@ namespace Shared.Networks
         ClientVersion,
         Disconnect,
         KeepAlive,
+        NewAccount
     }
 }

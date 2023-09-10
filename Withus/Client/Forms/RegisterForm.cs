@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Client.Networks;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 using WithusUI.Configs;
 using WithusUI.Effects.FadeEffect;
 using WithusUI.Forms;
 using WithusUI.Helpers;
+using C = ClientPackets;
 
 namespace Client.Forms
 {
@@ -115,7 +117,16 @@ namespace Client.Forms
 
             primeButton_Submit.Enabled = false;
             button_Return.Enabled = false;
+
             Console.WriteLine("회원가입 패킷 전송");
+
+            Network.Enqueue(new C.NewAccount()
+            {
+                UserEmail = darkTextBox_Email.Texts,
+                UserPassword = darkTextBox_Password.Texts,
+                UserName = darkTextBox_UserName.Texts,
+                UserPhone = darkTextBox_Phone.Texts
+            });
         }
 
         private void InputPassword_TextChangedEvent(object sender, EventArgs e)

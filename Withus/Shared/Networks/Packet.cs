@@ -89,6 +89,8 @@ namespace Shared.Networks
                     return new C.Disconnect();
                 case (short)ClientPacketIds.KeepAlive:
                     return new C.KeepAlive();
+                case (short)ClientPacketIds.NewAccount:
+                    return new C.NewAccount();
                 default:
                     return null;
             }

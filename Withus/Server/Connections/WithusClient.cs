@@ -4,6 +4,7 @@ using System.Collections.Concurrent;
 using System.Net.Sockets;
 using S = ServerPackets;
 using C = ClientPackets;
+using ClientPackets;
 
 namespace Server.Connections
 {
@@ -237,7 +238,19 @@ namespace Server.Connections
                 case (short)ClientPacketIds.KeepAlive:
                     ClientKeepAlive((C.KeepAlive)p);
                     break;
+                case (short)ClientPacketIds.NewAccount:
+                    NewAccount((C.NewAccount)p);
+                    break;
             }
+        }
+
+        private void NewAccount(C.NewAccount p)
+        {
+            Console.WriteLine($"[ NEWACCOUNT ] -SESSION:{SessionID} -IP:{IPAddress}");
+            Console.WriteLine($"EMAIL : {p.UserEmail}");
+            Console.WriteLine($"PASSWORD : {p.UserPassword}");
+            Console.WriteLine($"NAME : {p.UserName}");
+            Console.WriteLine($"PHONE : {p.UserPhone}");
         }
 
         private void ClientKeepAlive(C.KeepAlive p)
@@ -246,16 +259,18 @@ namespace Server.Connections
             LastKeepAliveDateTime = DateTime.Now;
             Enqueue(new S.KeepAlive
             {
-                Time  =p.Time
+                Time = p.Time
             });
         }
 
         public void Disconnect(DisconnectReason reasonType)
         {
-            if (!Connected) return;
-
+            if (!Connected) return;            
             switch (reasonType)
             {
+                case DisconnectReason.ClientShutDown:
+                    Console.WriteLine($"[ DISCONNECT - SHUTDOWN ] -SESSION:{SessionID} -IP:{IPAddress}");
+                    break;
                 case DisconnectReason.TimeOut:
                     Console.WriteLine($"[ DISCONNECT - TIMEOUT ] -SESSION:{SessionID} -IP:{IPAddress}");
                     break;
