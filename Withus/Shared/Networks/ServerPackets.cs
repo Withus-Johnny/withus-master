@@ -84,4 +84,40 @@ namespace ServerPackets
             writer.Write(Reason);
         }
     }
+
+    public sealed class NewAccountSuccess : Packet
+    {
+        public override short Index
+        {
+            get { return (short)ServerPacketIds.NewAccountSuccess; }
+        }
+
+        protected override void ReadPacket(BinaryReader reader)
+        {
+        }
+
+        protected override void WritePacket(BinaryWriter writer)
+        {
+        }
+    }
+
+    public sealed class NewAccountFailure : Packet
+    {
+        public override short Index
+        {
+            get { return (short)ServerPacketIds.NewAccountFailure; }
+        }
+
+        public byte Reason;
+
+        protected override void ReadPacket(BinaryReader reader)
+        {
+            Reason = reader.ReadByte();
+        }
+
+        protected override void WritePacket(BinaryWriter writer)
+        {
+            writer.Write(Reason);
+        }
+    }
 }

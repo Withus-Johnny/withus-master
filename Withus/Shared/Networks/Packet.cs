@@ -108,6 +108,10 @@ namespace Shared.Networks
                     return new S.Disconnect();
                 case (short)ServerPacketIds.KeepAlive:
                     return new S.KeepAlive();
+                case (short)ServerPacketIds.NewAccountSuccess:
+                    return new S.NewAccountSuccess();
+                case (short)ServerPacketIds.NewAccountFailure:
+                    return new S.NewAccountFailure();
                 default:
                     return null;
             }

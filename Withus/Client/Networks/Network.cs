@@ -3,6 +3,8 @@ using Shared.Networks;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Net.Sockets;
 using System.Windows.Forms;
 using C = ClientPackets;
@@ -231,7 +233,9 @@ namespace Client.Networks
         public static void Enqueue(Packet p)
         {
             if (_sendList != null && p != null)
+            {
                 _sendList.Enqueue(p);
+            }
         }
     }
 }

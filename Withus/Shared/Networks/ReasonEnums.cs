@@ -11,4 +11,10 @@ namespace Shared.Networks
         ClientExit,
         Maintainance
     }
+
+    public enum NewAccountReason : byte
+    {
+        EmailAlreadyInUse,
+        RegistrationStopped
+    }
 }

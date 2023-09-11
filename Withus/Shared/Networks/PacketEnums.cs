@@ -10,7 +10,10 @@ namespace Shared.Networks
         Disconnect,
         ClientVersion,
         KeepAlive,
+        NewAccountSuccess,
+        NewAccountFailure,
     }
+
     public enum ClientPacketIds : short
     {
         ClientVersion,

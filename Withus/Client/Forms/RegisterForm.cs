@@ -30,6 +30,16 @@ namespace Client.Forms
             linkLabel1_Descript.Text = "양식에 맞춰 입력을 해주세요.";
         }
 
+        public void NewAccountFailure(string reason)
+        {
+            this.BeginInvoke(new Action(async () =>
+            {
+                MessageBox.Show(this, reason, "시스템");
+                await _fadeEffect.FormFadeOutAsync(this);
+                this.Close();
+            }));
+        }
+
         #region Control Events
         private void RegisterForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -120,10 +130,11 @@ namespace Client.Forms
 
             Console.WriteLine("회원가입 패킷 전송");
 
+
             Network.Enqueue(new C.NewAccount()
             {
                 UserEmail = darkTextBox_Email.Texts,
-                UserPassword = darkTextBox_Password.Texts,
+                UserPassword = PasswordHasher.HashPassword(darkTextBox_Password.Texts),
                 UserName = darkTextBox_UserName.Texts,
                 UserPhone = darkTextBox_Phone.Texts
             });

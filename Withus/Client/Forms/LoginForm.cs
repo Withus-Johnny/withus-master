@@ -2,6 +2,7 @@
 using Client.Properties;
 using System;
 using System.Drawing;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using WithusUI.Configs;
 using WithusUI.Effects.FadeEffect;
@@ -17,8 +18,8 @@ namespace Client.Forms
 
         IFadeEffect _fadeEffect;
 
-        public AgreementForm _agreementForm;
-        public RegisterForm _registerForm;
+        public AgreementForm AgreementForm;
+        public RegisterForm RegisterForm;
 
         public LoginForm()
         {
@@ -37,41 +38,40 @@ namespace Client.Forms
 
         public void InitializeAgreementForm()
         {
-            if (_agreementForm != null) return;
-            _agreementForm = new AgreementForm();
-            _agreementForm.FormClosed += _agreementForm_FormClosed;
-            _agreementForm.ShowDialog(this);
+            if (AgreementForm != null) return;
+            AgreementForm = new AgreementForm();
+            AgreementForm.FormClosed += _AgreementForm_FormClosed;
+            AgreementForm.ShowDialog(this);
         }
 
         public void InitializeRegisterForm()
         {
-            if (_registerForm != null) return;
-            _registerForm = new RegisterForm();
-            _registerForm.FormClosed += _registerForm_FormClosed;
-            _registerForm.ShowDialog(this);
+            if (RegisterForm != null) return;
+            RegisterForm = new RegisterForm();
+            RegisterForm.FormClosed += RegisterForm_FormClosed;
+            RegisterForm.ShowDialog(this);
         }
 
-
         #region Control Events
-        private void _registerForm_FormClosed(object sender, FormClosedEventArgs e)
+        private void RegisterForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (_registerForm == null) return;
-            _registerForm.FormClosed -= _registerForm_FormClosed;
-            _registerForm = null;
+            if (RegisterForm == null) return;
+            RegisterForm.FormClosed -= RegisterForm_FormClosed;
+            RegisterForm = null;
         }
 
         private void linkLabel_Register_Click(object sender, EventArgs e)
         {
-            if (_agreementForm == null)
+            if (AgreementForm == null)
             {
                 InitializeAgreementForm();
             }
         }
 
-        private void _agreementForm_FormClosed(object sender, FormClosedEventArgs e)
+        private void _AgreementForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            _agreementForm.FormClosed -= _agreementForm_FormClosed;
-            _agreementForm = null;
+            AgreementForm.FormClosed -= _AgreementForm_FormClosed;
+            AgreementForm = null;
         }
 
         private void LinkLabel_LoginProblem_Paint(object sender, PaintEventArgs e)

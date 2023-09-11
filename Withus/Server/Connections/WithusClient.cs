@@ -246,16 +246,13 @@ namespace Server.Connections
 
         private void NewAccount(C.NewAccount p)
         {
-            Console.WriteLine($"[ NEWACCOUNT ] -SESSION:{SessionID} -IP:{IPAddress}");
-            Console.WriteLine($"EMAIL : {p.UserEmail}");
-            Console.WriteLine($"PASSWORD : {p.UserPassword}");
-            Console.WriteLine($"NAME : {p.UserName}");
-            Console.WriteLine($"PHONE : {p.UserPhone}");
+            Console.WriteLine($"[ NEWACCOUNT - {p.UserEmail}] -SESSION:{SessionID} -IP:{IPAddress}");
+            Enqueue(new S.NewAccountFailure { Reason = (byte)NewAccountReason.RegistrationStopped });
+            Console.WriteLine($"[ NEWACCOUNT FAILURE - RegistrationStopped ] -SESSION:{SessionID} -IP:{IPAddress}");
         }
 
         private void ClientKeepAlive(C.KeepAlive p)
-        {
-            Console.WriteLine($"[ KEEPALIVE - {LastKeepAliveDateTime} -> {DateTime.Now}] -SESSION:{SessionID} -IP:{IPAddress}");
+        {            
             LastKeepAliveDateTime = DateTime.Now;
             Enqueue(new S.KeepAlive
             {
@@ -265,7 +262,7 @@ namespace Server.Connections
 
         public void Disconnect(DisconnectReason reasonType)
         {
-            if (!Connected) return;            
+            if (!Connected) return;
             switch (reasonType)
             {
                 case DisconnectReason.ClientShutDown:

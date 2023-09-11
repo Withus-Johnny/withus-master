@@ -1,9 +1,9 @@
 ﻿using Client.Networks;
+using ServerPackets;
 using Shared.Networks;
 using System;
 using System.Diagnostics;
 using System.Threading;
-using System.Windows.Forms;
 using C = ClientPackets;
 using S = ServerPackets;
 
@@ -47,7 +47,6 @@ namespace Client.Controllers
                     Network.Process();
                 }
 
-                Console.WriteLine("시스템 루프 아웃");
                 Time = 0;
                 BytesSent = 0;
                 BytesReceived = 0;
@@ -82,17 +81,37 @@ namespace Client.Controllers
                 case (short)ServerPacketIds.KeepAlive:
                     KeepAlive((S.KeepAlive)p);
                     break;
+                case (short)ServerPacketIds.NewAccountSuccess:
+                    NewAccountSuccess((S.NewAccountSuccess)p);
+                    break;
+                case (short)ServerPacketIds.NewAccountFailure:
+                    NewAccountFailure((S.NewAccountFailure)p);
+                    break;
                 default:
                     Console.WriteLine($"미개발 : {p.Index}");
                     break;
             }
         }
 
+        private void NewAccountFailure(NewAccountFailure p)
+        {
+            switch ((NewAccountReason)p.Reason)
+            {
+                case NewAccountReason.RegistrationStopped:
+                    Program.loginForm.RegisterForm.NewAccountFailure("지금은 회원가입을 진행 할 수 없습니다");
+                    break;
+            }
+        }
+
+        private void NewAccountSuccess(S.NewAccountSuccess p)
+        {
+            Console.WriteLine("회원가입 승인");
+        }
+
         private void KeepAlive(S.KeepAlive p)
         {
             if (p.Time == 0) return;
             Network.PingTime = (Time - p.Time);
-            Console.WriteLine($"PING : {Network.PingTime}");
         }
     }
 }

@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Client
 {
-    internal static class Program
-    {
-
+    public static class Program
+    {        
+        public static Guid guid = Guid.NewGuid();
         public static LoginForm loginForm;
 
         /// <summary>
