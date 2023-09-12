@@ -3,9 +3,13 @@ using Client.Forms;
 using Client.Networks;
 using Shared.Networks;
 using System;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Client
@@ -21,7 +25,25 @@ namespace Client
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
+            #region Test Envir
+            FileInfo serverFileInfo = new FileInfo(@"d:\Server.lnk");
+
+			if (serverFileInfo.Exists)
+			{
+				Process[] processes = Process.GetProcessesByName("Server");
+				if (processes.Length == 0)
+				{
+                    serverFileInfo = null;
+                    Process serverProcess = Process.Start(@"D:\Debug\Server\Server.exe");
+					Application.ApplicationExit += (o1, e1) => {
+						serverProcess.Kill();
+						serverProcess = null;
+					};
+				}
+			}
+
+			#endregion
+			Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
             Packet.IsServer = false;
@@ -29,5 +51,5 @@ namespace Client
             Application.Run(loginForm = new LoginForm());
             SystemController.Instance.Stop();
         }
-    }
+	}
 }

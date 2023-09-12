@@ -128,9 +128,6 @@ namespace Client.Forms
             primeButton_Submit.Enabled = false;
             button_Return.Enabled = false;
 
-            Console.WriteLine("회원가입 패킷 전송");
-
-
             Network.Enqueue(new C.NewAccount()
             {
                 UserEmail = darkTextBox_Email.Texts,

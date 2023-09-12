@@ -6,11 +6,15 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>disable</Nullable>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-		<OutputPath>C:\Server\</OutputPath>
+		<OutputPath>D:\Debug\Server\</OutputPath>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\Shared\Shared.csproj" />
 	</ItemGroup>
+
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="if not exist &quot;D:\$(TargetName).lnk&quot; mklink &quot;D:\$(TargetName).lnk&quot; &quot;D:\Debug\Server\Server.exe&quot;" />
+	</Target>
 
 </Project>

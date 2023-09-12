@@ -7,14 +7,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WithusUI", "WithusUI\WithusUI.csproj", "{557D8E59-9BF7-4730-BE13-C8F354D1B48A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{7DD1F06B-FABD-422E-83B1-BA0159D7F00D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "Server\Server.csproj", "{7DD1F06B-FABD-422E-83B1-BA0159D7F00D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{09E84E69-B017-4EF7-B3F2-EBDEACCDF52F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Shared\Shared.csproj", "{09E84E69-B017-4EF7-B3F2-EBDEACCDF52F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BC4DAFBF-8306-4296-9B47-6EC4B1C47B27}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIServer", "APIServer\APIServer.csproj", "{2C6919C3-B0FD-480E-B3EA-E94922AEF130}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +40,10 @@ Global
 		{09E84E69-B017-4EF7-B3F2-EBDEACCDF52F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09E84E69-B017-4EF7-B3F2-EBDEACCDF52F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09E84E69-B017-4EF7-B3F2-EBDEACCDF52F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C6919C3-B0FD-480E-B3EA-E94922AEF130}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C6919C3-B0FD-480E-B3EA-E94922AEF130}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C6919C3-B0FD-480E-B3EA-E94922AEF130}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C6919C3-B0FD-480E-B3EA-E94922AEF130}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
