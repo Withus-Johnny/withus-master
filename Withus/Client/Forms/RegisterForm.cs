@@ -1,4 +1,5 @@
 ﻿using Client.Networks;
+using Shared.Networks;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -7,6 +8,7 @@ using WithusUI.Effects.FadeEffect;
 using WithusUI.Forms;
 using WithusUI.Helpers;
 using C = ClientPackets;
+using PasswordHasher = Shared.Networks.PasswordHasher;
 
 namespace Client.Forms
 {
@@ -30,14 +32,16 @@ namespace Client.Forms
             linkLabel1_Descript.Text = "양식에 맞춰 입력을 해주세요.";
         }
 
-        public void NewAccountFailure(string reason)
+        public void NewAccountFailure(NewAccountReason reason)
         {
-            this.BeginInvoke(new Action(async () =>
-            {
-                MessageBox.Show(this, reason, "시스템");
-                await _fadeEffect.FormFadeOutAsync(this);
-                this.Close();
-            }));
+           
+
+            //this.BeginInvoke(new Action(async () =>
+            //{
+            //    MessageBox.Show(this, reason, "시스템");
+            //    await _fadeEffect.FormFadeOutAsync(this);
+            //    this.Close();
+            //}));
         }
 
         #region Control Events
@@ -133,7 +137,9 @@ namespace Client.Forms
                 UserEmail = darkTextBox_Email.Texts,
                 UserPassword = PasswordHasher.HashPassword(darkTextBox_Password.Texts),
                 UserName = darkTextBox_UserName.Texts,
-                UserPhone = darkTextBox_Phone.Texts
+                UserPhone = darkTextBox_Phone.Texts,
+                Recommender = "",
+                Advisor = ""
             });
         }
 

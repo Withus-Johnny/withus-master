@@ -5,6 +5,8 @@ using System.Net.Sockets;
 using S = ServerPackets;
 using C = ClientPackets;
 using ClientPackets;
+using Server.Controllers;
+using System.Net;
 
 namespace Server.Connections
 {
@@ -30,6 +32,8 @@ namespace Server.Connections
 
         byte[] _rawData = new byte[0];
         byte[] _rawBytes = new byte[8 * 1024];
+
+        private string _userEntity = string.Empty;
 
         public bool Disconnecting
         {
@@ -244,15 +248,42 @@ namespace Server.Connections
             }
         }
 
-        private void NewAccount(C.NewAccount p)
+        private async void NewAccount(C.NewAccount p)
         {
             Console.WriteLine($"[ NEWACCOUNT - {p.UserEmail}] -SESSION:{SessionID} -IP:{IPAddress}");
-            Enqueue(new S.NewAccountFailure { Reason = (byte)NewAccountReason.RegistrationStopped });
-            Console.WriteLine($"[ NEWACCOUNT FAILURE - RegistrationStopped ] -SESSION:{SessionID} -IP:{IPAddress}");
+
+            Dictionary<string, string> newUser = new Dictionary<string, string>()
+            {
+                { "Email", p.UserEmail },
+                { "Password", p.UserPassword },
+                { "UserName", p.UserName },
+                { "UserPhone", p.UserPhone },
+                { "Recommender", p.Recommender },
+                { "Advisor", p.Advisor }
+            };
+
+            var response = await APIController.Instance.Register(newUser);
+
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.OK:
+                    _userEntity = response.Content;
+                    Console.WriteLine(_userEntity);
+                    Enqueue(new S.NewAccountSuccess());
+                    break;
+                case HttpStatusCode.BadRequest:
+                    Enqueue(new S.NewAccountFailure { Reason = (byte)NewAccountReason.EmailOrPhoneAlreadyInUse });
+                    Console.WriteLine($"[ NEWACCOUNT FAILURE - EmailOrPhoneAlreadyInUse ] -SESSION:{SessionID} -IP:{IPAddress}");
+                    break;
+                default:
+                    Console.WriteLine($"UNDEVELOP : {(uint)response.StatusCode}");
+                    Enqueue(new S.NewAccountFailure { Reason = (byte)NewAccountReason.RegistrationStopped });
+                    break;
+            }
         }
 
         private void ClientKeepAlive(C.KeepAlive p)
-        {            
+        {
             LastKeepAliveDateTime = DateTime.Now;
             Enqueue(new S.KeepAlive
             {

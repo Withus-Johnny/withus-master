@@ -14,7 +14,7 @@ namespace Shared.Networks
 
     public enum NewAccountReason : byte
     {
-        EmailAlreadyInUse,
-        RegistrationStopped
+        EmailOrPhoneAlreadyInUse,
+        RegistrationStopped        
     }
 }

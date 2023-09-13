@@ -68,6 +68,8 @@ namespace ClientPackets
         public string UserPassword;
         public string UserName;
         public string UserPhone;
+        public string Recommender;
+        public string Advisor;
 
         protected override void ReadPacket(BinaryReader reader)
         {
@@ -75,6 +77,8 @@ namespace ClientPackets
             UserPassword = reader.ReadString();
             UserName = reader.ReadString();
             UserPhone = reader.ReadString();
+            Recommender = reader.ReadString();
+            Advisor = reader.ReadString();
         }
         protected override void WritePacket(BinaryWriter writer)
         {
@@ -82,6 +86,8 @@ namespace ClientPackets
             writer.Write(UserPassword);
             writer.Write(UserName);
             writer.Write(UserPhone);
+            writer.Write(Recommender);
+            writer.Write(Advisor);
         }
     }
 }

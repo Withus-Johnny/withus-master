@@ -95,12 +95,7 @@ namespace Client.Controllers
 
         private void NewAccountFailure(NewAccountFailure p)
         {
-            switch ((NewAccountReason)p.Reason)
-            {
-                case NewAccountReason.RegistrationStopped:
-                    Program.loginForm.RegisterForm.NewAccountFailure("지금은 회원가입을 진행 할 수 없습니다");
-                    break;
-            }
+            Program.loginForm.RegisterForm.NewAccountFailure((NewAccountReason)p.Reason);
         }
 
         private void NewAccountSuccess(S.NewAccountSuccess p)
